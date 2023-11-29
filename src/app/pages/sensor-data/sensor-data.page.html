@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sensor Data</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>borea2</h1>
+  <div *ngFor="let reading of sensorData$ | async">
+    <p>Temperature: {{ reading.temperature }}</p>
+    <p>Humidity: {{ reading.humidity }}</p>
+    <p>Pressure: {{ reading.pressure }}</p>
+    <p>Moisture: {{ reading.moisture }}</p>
+  </div>
+</ion-content>
