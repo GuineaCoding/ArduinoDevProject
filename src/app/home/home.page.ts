@@ -1,4 +1,7 @@
+// src/app/home/home.page.ts
+
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
     // Initialization logic here
   }
 
+  turnLedRed() {
+    this.firebaseService.setLedColorRed(true);
+  }
+
+  turnLedGreen() {
+    this.firebaseService.setLedColorRed(false);
+  }
 }

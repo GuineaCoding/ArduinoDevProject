@@ -11,6 +11,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // Firebase A
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; // Firebase Realtime Database
 import { environment } from '../environments/environment'; // Firebase Configuration
 
+// Import FirebaseService
+import { FirebaseService } from './services/firebase.service';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,7 +24,10 @@ import { environment } from '../environments/environment'; // Firebase Configura
     AngularFireAuthModule, // Firebase Authentication
     AngularFireDatabaseModule, // Firebase Realtime Database
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    FirebaseService // Provide FirebaseService here
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
