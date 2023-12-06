@@ -6,7 +6,72 @@
 
 <ion-content>
   <p>Welcome to the Home Page!</p>
-  <!-- Your page content here -->
-  <ion-button (click)="turnLedRed()">Turn Red</ion-button>
-  <ion-button (click)="turnLedGreen()">Turn Green</ion-button>
+  <ion-row>
+  
+    <ion-col size="6">
+      <ion-card (click)="navigateToDetail('temperature')">
+        <ion-card-content>
+          <h2>Temperature</h2>
+          <!-- <p>{{ temperatureValue }}</p> -->
+        </ion-card-content>
+        <ion-button expand="full">View Details</ion-button>
+      </ion-card>
+    </ion-col>
+
+    <!-- Box 2: Humidity -->
+    <ion-col size="6">
+      <ion-card (click)="navigateToDetail('humidity')">
+        <ion-card-content>
+          <h2>Humidity</h2>
+          <p>{{ humidityValue }}</p>
+        </ion-card-content>
+        <ion-button expand="full">View Details</ion-button>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card (click)="navigateToDetail('temperature')">
+        <ion-card-content>
+          <h2>Temperature</h2>
+          <p>{{ temperatureValue }}</p>
+        </ion-card-content>
+        <ion-button expand="full">View Details</ion-button>
+      </ion-card>
+    </ion-col>
+
+   
+    <ion-col size="6">
+      <ion-card (click)="navigateToDetail('humidity')">
+        <ion-card-content>
+          <h2>Humidity</h2>
+          <p>{{ humidityValue }}</p>
+        </ion-card-content>
+        <ion-button expand="full">View Details</ion-button>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card (click)="navigateToDetail('temperature')">
+        <ion-card-content>
+          <h2>Temperature</h2>
+          <p>{{ temperatureValue }}</p>
+        </ion-card-content>
+        <ion-button expand="full">View Details</ion-button>
+      </ion-card>
+    </ion-col>
+
+  
+    <ion-col size="6">
+      <ion-card (click)="navigateToDetail('humidity')">
+        <ion-card-content>
+          <h2>Humidity</h2>
+          <p>{{ humidityValue }}</p>
+        </ion-card-content>
+        <ion-button expand="full">View Details</ion-button>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-col size="6">
+    <ion-button ion-col size="6" (click)="turnLedRed()">Turn Red</ion-button>
+  </ion-col>
+  <ion-col size="6"> <ion-button ion-col size="6" (click)="turnLedGreen()">Turn Green</ion-button></ion-col>
+
 </ion-content>

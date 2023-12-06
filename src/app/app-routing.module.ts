@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,18 +18,17 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    canActivate: [AuthGuard] // Protect the 'home' route
   },
   {
     path: 'sensor-data',
-    loadChildren: () => import('./pages/sensor-data/sensor-data.module').then(m => m.SensorDataPageModule)
-  },
-  { 
-    path: 'sensor-data', 
-    loadChildren: () => import('./pages/sensor-data/sensor-data.module').then(m => m.SensorDataPageModule) 
-  },
-  
+    loadChildren: () => import('./pages/sensor-data/sensor-data.module').then(m => m.SensorDataPageModule),
+    canActivate: [AuthGuard] // Protect the 'sensor-data' route
+  }
+
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
