@@ -9,6 +9,6 @@ export class SensorDataService {
   constructor(private db: AngularFireDatabase) {}
 
   getSensorData(): Observable<any[]> {
-    return this.db.list('sensors').valueChanges();
+    return this.db.list('sensorReadings').valueChanges();
   }
 }

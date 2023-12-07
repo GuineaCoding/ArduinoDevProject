@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'sensor-data',
     loadChildren: () => import('./pages/sensor-data/sensor-data.module').then(m => m.SensorDataPageModule),
     canActivate: [AuthGuard] // Protect the 'sensor-data' route
+  },
+  {
+    path: 'temperature',
+    loadChildren: () => import('./temperature/temperature.module').then( m => m.TemperaturePageModule)
   }
 
 ];

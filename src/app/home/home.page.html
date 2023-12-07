@@ -9,10 +9,10 @@
   <ion-row>
   
     <ion-col size="6">
-      <ion-card (click)="navigateToDetail('temperature')">
+        <ion-card (click)="navigateToDetail('temperature')">
         <ion-card-content>
           <h2>Temperature</h2>
-          <!-- <p>{{ temperatureValue }}</p> -->
+          <p>{{ reading.temperature }}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
@@ -20,39 +20,42 @@
 
     <!-- Box 2: Humidity -->
     <ion-col size="6">
-      <ion-card (click)="navigateToDetail('humidity')">
+      <ion-card>
+        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
         <ion-card-content>
           <h2>Humidity</h2>
-          <p>{{ humidityValue }}</p>
+          <p>{{ reading.humidity }}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
     </ion-col>
     <ion-col size="6">
-      <ion-card (click)="navigateToDetail('temperature')">
+      <ion-card>
+        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
         <ion-card-content>
-          <h2>Temperature</h2>
-          <p>{{ temperatureValue }}</p>
+          <h2>pressure</h2>
+          <p>{{ reading.pressure}}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
     </ion-col>
 
-   
     <ion-col size="6">
-      <ion-card (click)="navigateToDetail('humidity')">
+      <ion-card>
+        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
         <ion-card-content>
-          <h2>Humidity</h2>
-          <p>{{ humidityValue }}</p>
+          <h2>moisture</h2>
+          <p>{{ reading.moisture}}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
     </ion-col>
     <ion-col size="6">
-      <ion-card (click)="navigateToDetail('temperature')">
+      <ion-card>
+        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
         <ion-card-content>
-          <h2>Temperature</h2>
-          <p>{{ temperatureValue }}</p>
+          <h2>CO2</h2>
+          <p>{{ reading.co2 }}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
@@ -60,10 +63,11 @@
 
   
     <ion-col size="6">
-      <ion-card (click)="navigateToDetail('humidity')">
+      <ion-card>
+        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
         <ion-card-content>
-          <h2>Humidity</h2>
-          <p>{{ humidityValue }}</p>
+          <h2>pirState</h2>
+          <p>{{ reading.pirstate }}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
