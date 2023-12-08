@@ -13,6 +13,6 @@ export class SensorDataPage implements OnInit {
   constructor(private sensorDataService: SensorDataService) {}
   
   ngOnInit() {
-    this.sensorData$ = this.sensorDataService.getSensorData(); // Fetch the data
+    // this.sensorData$ = this.sensorDataService.getSensorData(); // Fetch the data
   }
 }
