@@ -37,16 +37,17 @@
   <!-- Temperature Trend for the Current Day -->
    <ion-card> 
     <ion-card-header>
-      <ion-card-title>Today's Temperature Trend</ion-card-title>
+      <ion-card-title>Temperature Trend</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <canvas id="temperatureChart"></canvas>
     </ion-card-content>
   </ion-card>
 
+  <!-- Timeframe Selection Buttons -->
   <ion-row>
     <ion-col>
-      <!-- <ion-button (click)="updateTimeFrame('hour')">Last Hour</ion-button>
+      <ion-button (click)="updateTimeFrame('hour')">Last Hour</ion-button>
     </ion-col>
     <ion-col>
       <ion-button (click)="updateTimeFrame('day')">Last Day</ion-button>
@@ -58,7 +59,7 @@
       <ion-button (click)="updateTimeFrame('month')">Last Month</ion-button>
     </ion-col>
     <ion-col>
-      <ion-button (click)="updateTimeFrame('year')">Last Year</ion-button> -->
+      <ion-button (click)="updateTimeFrame('year')">Last Year</ion-button>
     </ion-col>
   </ion-row>
 
