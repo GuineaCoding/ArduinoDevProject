@@ -28,7 +28,8 @@ export class TemperaturePage implements OnInit {
     this.fetchTemperatureDataForTimeFrame('hours', 24, 'day');
   }
 
-  updateTimeFrame(timeFrame: string) {
+  updateTimeFrame(eventDetail: any) {
+    const timeFrame = eventDetail.value;
     let hours;
     switch (timeFrame) {
       case 'hour':
@@ -41,16 +42,16 @@ export class TemperaturePage implements OnInit {
         hours = 24 * 7;
         break;
       case 'month':
-        hours = 24 * 30; 
+        hours = 24 * 30; // Approximate
         break;
       case 'year':
-        hours = 24 * 365; 
+        hours = 24 * 365; // Approximate
         break;
       default:
-        console.error('Invalid time frame specified');
+        console.error('Invalid time frame specified: ', timeFrame);
         return;
-    }     
-   
+    }
+  
     this.fetchTemperatureDataForTimeFrame('hours', hours, timeFrame);
   }
   
@@ -75,12 +76,21 @@ export class TemperaturePage implements OnInit {
       labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleString());
     }
   
-    this.currentTemperature = temperatures[temperatures.length - 1];
-    this.minTemperature = Math.min(...temperatures);
-    this.maxTemperature = Math.max(...temperatures);
+    // Check if temperatures array is empty
+    if (temperatures.length > 0) {
+      this.currentTemperature = temperatures[temperatures.length - 1];
+      this.minTemperature = Math.min(...temperatures);
+      this.maxTemperature = Math.max(...temperatures);
+    } else {
+      // Handle the case where there are no valid temperature readings
+      this.currentTemperature = 0; // Or any default value you prefer
+      this.minTemperature = 0; // Or any default value you prefer
+      this.maxTemperature = 0; // Or any default value you prefer
+    }
   
     this.setupTemperatureChart(labels, temperatures);
   }
+  
   
 
   setupTemperatureChart(labels: string[], temperatures: number[]) {
@@ -99,17 +109,22 @@ export class TemperaturePage implements OnInit {
     const options = {
       scales: {
         y: {
-          beginAtZero: true
+          
         },
         x: {
-          type: 'time' as const, 
+         
           time: {
             unit: 'hour' as const, 
           },
           title: {
             display: true,
             text: 'Time'
-          }
+          },
+          ticks: {
+            // Set rotation angles here
+            minRotation: 90, // Adjust as needed
+            maxRotation: 90  // Adjust as needed
+          },
         }
       },
       plugins: {
@@ -129,10 +144,12 @@ export class TemperaturePage implements OnInit {
     
     const canvas = document.getElementById('temperatureChart') as HTMLCanvasElement;
     if (canvas) {
+      canvas.height = 300;  // Set the height to 400 pixels or any other value as needed
+    
       this.temperatureChart = new Chart(canvas, {
         type: 'line',
-        data: data
-      
+        data: data,
+        options: options
       });
     } else {
       console.error('Canvas element not found');

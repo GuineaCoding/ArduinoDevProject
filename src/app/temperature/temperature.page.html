@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Temperature</ion-title>
+    <ion-title class="ion-text-center">Temperature</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,65 +11,68 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Image -->
-  <!-- <ion-img src="path-to-your-image.jpg"></ion-img> -->
-
   <!-- Current Temperature -->
-  <ion-card>
+  <ion-card class="dataContent">
     <ion-card-header>
-      <ion-card-title>Current Temperature</ion-card-title>
+      <ion-card-title class="ion-text-center">Temperature Information</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      {{ currentTemperature }} °C
+      <ion-grid>
+        <ion-row>
+          <!-- Left Column -->
+
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h2 class="ion-text-center core-indicator-Label">Current Temperature</h2>
+              <p class="ion-text-center main-indicator-Label">{{ currentTemperature }} °C</p>
+
+              <h2 class="ion-text-center core-indicator-Label ">Min / Max Temperature for the Timeframe</h2>
+              <p class="ion-text-center core-indicator-Label">Min Temperature </p>
+              <p class="ion-text-center main-indicator-Label">{{ minTemperature }} °C</p>
+              <p class="ion-text-center core-indicator-Label">Max Temperature</p>
+              <p class="ion-text-center main-indicator-Label">{{ maxTemperature }} °C</p>
+
+            </ion-text>
+          </ion-col>
+
+          <!-- Right Column -->
+          <ion-col size="6">
+            <ion-img src="/assets/images/thermometerPngImage.png"></ion-img> 
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 
-    <!-- Minimum and Maximum Temperature -->
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Today's Min/Max Temperature</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Min Temperature: {{ minTemperature }} °C, Max Temperature: {{ maxTemperature }} °C</p>
-      </ion-card-content>
-    </ion-card>
+  <!-- Timeframe Selection Buttons -->
+  <ion-card>
+    <ion-segment (ionChange)="updateTimeFrame($event.detail)">
+      <ion-segment-button value="hour">
+        <ion-label class="ion-text-wrap">Last Hour</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="day">
+        <ion-label class="ion-text-wrap">Last Day</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="week">
+        <ion-label class="ion-text-wrap">Last Week</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="month">
+        <ion-label class="ion-text-wrap">Last Month</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="year">
+        <ion-label class="ion-text-wrap">Last Year</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+  </ion-card>
 
   <!-- Temperature Trend for the Current Day -->
-   <ion-card> 
+  <ion-card>
     <ion-card-header>
       <ion-card-title>Temperature Trend</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <canvas id="temperatureChart"></canvas>
+
     </ion-card-content>
   </ion-card>
-
-  <!-- Timeframe Selection Buttons -->
-  <ion-row>
-    <ion-col>
-      <ion-button (click)="updateTimeFrame('hour')">Last Hour</ion-button>
-    </ion-col>
-    <ion-col>
-      <ion-button (click)="updateTimeFrame('day')">Last Day</ion-button>
-    </ion-col>
-    <ion-col>
-      <ion-button (click)="updateTimeFrame('week')">Last Week</ion-button>
-    </ion-col>
-    <ion-col>
-      <ion-button (click)="updateTimeFrame('month')">Last Month</ion-button>
-    </ion-col>
-    <ion-col>
-      <ion-button (click)="updateTimeFrame('year')">Last Year</ion-button>
-    </ion-col>
-  </ion-row>
-
-  <!-- Second Chart for Timeframe Data -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Temperature Trend</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <canvas id="historicalTemperatureChart"></canvas>
-    </ion-card-content>
-  </ion-card>
-</ion-content>

@@ -2,3 +2,26 @@ canvas {
     width: 100% !important;
     height: auto !important;
   }
+
+  /* Wrapping text for labels */
+.wrapped-label {
+  white-space: normal;
+  text-align: center;
+  word-wrap: normal;
+}
+
+/* Styling for the segmented buttons */
+ion-segment-button {
+  --color: lightgreen; /* Light green color for the text */
+  --color-checked: lightgreen; /* Light green color when the button is selected */
+  --background-checked: var(--ion-color-primary); /* Change this to the desired color when the button is selected */
+}
+
+
+.main-indicator-Label {
+  font-size: 20;
+}
+
+.core-indicator-Label {
+  font-size: 18;
+}
