@@ -76,13 +76,11 @@ export class TemperaturePage implements OnInit {
       labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleString());
     }
   
-    // Check if temperatures array is empty
     if (temperatures.length > 0) {
       this.currentTemperature = temperatures[temperatures.length - 1];
       this.minTemperature = Math.min(...temperatures);
       this.maxTemperature = Math.max(...temperatures);
     } else {
-      // Handle the case where there are no valid temperature readings
       this.currentTemperature = 0; // Or any default value you prefer
       this.minTemperature = 0; // Or any default value you prefer
       this.maxTemperature = 0; // Or any default value you prefer
@@ -90,6 +88,7 @@ export class TemperaturePage implements OnInit {
   
     this.setupTemperatureChart(labels, temperatures);
   }
+  
   
   
 

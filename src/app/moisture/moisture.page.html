@@ -1,41 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="ion-text-center">Temperature</ion-title>
+    <ion-title class="ion-text-center">Moisture</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Temperature</ion-title>
+      <ion-title size="large">Moisture</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- Current Temperature -->
+  <!-- Current Moisture -->
   <ion-card class="dataContent">
     <ion-card-header>
-      <ion-card-title class="ion-text-center">Temperature Timeframe Information</ion-card-title>
+      <ion-card-title class="ion-text-center">Moisture Timeframe Information</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <!-- Left Column -->
-
           <ion-col size="6">
-            <ion-text color="secondary" class="temperature-info">
-              <h2 class="ion-text-center core-indicator-label">Current Temperature</h2>
-              <p class="ion-text-center main-indicator-label">{{ currentTemperature?.toFixed(2) }} °C</p>
-              <p class="ion-text-center core-indicator-label">Min Temperature</p>
-              <p class="ion-text-center main-indicator-label">{{ minTemperature?.toFixed(2) }} °C</p>
-              <p class="ion-text-center core-indicator-label">Max Temperature</p>
-              <p class="ion-text-center main-indicator-label">{{ maxTemperature?.toFixed(2) }} °C</p>
+            <ion-text color="secondary" class="moisture-info">
+              <h2 class="ion-text-center core-indicator-label">Current Moisture</h2>
+              <p class="ion-text-center main-indicator-label">{{ currentMoisture?.toFixed(2) }} %</p>
+              <p class="ion-text-center core-indicator-label">Min Moisture</p>
+              <p class="ion-text-center main-indicator-label">{{ minMoisture?.toFixed(2) }} %</p>
+              <p class="ion-text-center core-indicator-label">Max Moisture</p>
+              <p class="ion-text-center main-indicator-label">{{ maxMoisture?.toFixed(2) }} %</p>
             </ion-text>
           </ion-col>
           
-
           <!-- Right Column -->
           <ion-col size="6">
-            <ion-img src="/assets/images/thermometerPngImage.png"></ion-img> 
+            <ion-img src="/assets/images/moisturePngImage.png"></ion-img> 
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -61,16 +59,15 @@
         <ion-label class="ion-text-wrap">Last Year</ion-label>
       </ion-segment-button>
     </ion-segment>
-
   </ion-card>
 
-  <!-- Temperature Trend for the Current Day -->
+  <!-- Moisture Trend for the Current Day -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Temperature Trend</ion-card-title>
+      <ion-card-title>Moisture Trend</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <canvas id="temperatureChart"></canvas>
-
+      <canvas id="moistureChart"></canvas>
     </ion-card-content>
   </ion-card>
+</ion-content>
