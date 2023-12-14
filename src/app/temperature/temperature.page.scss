@@ -10,11 +10,11 @@ canvas {
   word-wrap: normal;
 }
 
-/* Styling for the segmented buttons */
+
 ion-segment-button {
-  --color: lightgreen; /* Light green color for the text */
-  --color-checked: lightgreen; /* Light green color when the button is selected */
-  --background-checked: var(--ion-color-primary); /* Change this to the desired color when the button is selected */
+  --color: lightgreen; 
+  --color-checked: lightgreen; 
+  --background-checked: var(--ion-color-primary); 
 }
 
 
@@ -27,16 +27,16 @@ ion-segment-button {
 }
 
 .core-indicator-label {
-  font-size: 1.1em; /* Larger font for headings */
-  margin-bottom: 0.5em; /* Spacing below the heading */
-  color: #007bff; /* Adjust color as needed */
+  font-size: 1.1em; /* font for headings */
+  margin-bottom: 0.5em; 
+  color: #007bff;
 }
 
 .main-indicator-label {
-  font-size: 0.9em; /* Smaller font for values */
-  margin-bottom: 1em; /* Spacing below the value */
+  font-size: 0.9em; /* font for values */
+  margin-bottom: 1em; 
 }
 
 .temperature-info {
-  margin-top: 1em; /* Spacing above the first heading */
+  margin-top: 1em; 
 }

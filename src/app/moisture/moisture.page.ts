@@ -56,7 +56,7 @@ export class MoisturePage implements OnInit {
   }
   
   fetchMoistureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
-    const observable$ = this.sensorDataService.getSensorDataForLastHours(value); // Assume this service method fetches moisture data
+    const observable$ = this.sensorDataService.getSensorDataForLastHours(value); 
     observable$.subscribe(data => {
       this.processMoistureData(data, selectedTimeFrame);
     }, error => {

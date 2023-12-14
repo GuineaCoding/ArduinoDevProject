@@ -81,9 +81,9 @@ export class TemperaturePage implements OnInit {
       this.minTemperature = Math.min(...temperatures);
       this.maxTemperature = Math.max(...temperatures);
     } else {
-      this.currentTemperature = 0; // Or any default value you prefer
-      this.minTemperature = 0; // Or any default value you prefer
-      this.maxTemperature = 0; // Or any default value you prefer
+      this.currentTemperature = 0; 
+      this.minTemperature = 0; 
+      this.maxTemperature = 0; 
     }
   
     this.setupTemperatureChart(labels, temperatures);
@@ -120,9 +120,9 @@ export class TemperaturePage implements OnInit {
             text: 'Time'
           },
           ticks: {
-            // Set rotation angles here
-            minRotation: 90, // Adjust as needed
-            maxRotation: 90  // Adjust as needed
+            
+            minRotation: 90, 
+            maxRotation: 90  
           },
         }
       },
@@ -143,8 +143,7 @@ export class TemperaturePage implements OnInit {
     
     const canvas = document.getElementById('temperatureChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 300;  // Set the height to 400 pixels or any other value as needed
-    
+      canvas.height = 300;  
       this.temperatureChart = new Chart(canvas, {
         type: 'line',
         data: data,

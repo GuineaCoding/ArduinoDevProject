@@ -41,7 +41,7 @@ export class HomePage implements OnInit {
           // Now assign the values from the latest data
           this.reading.temperature = latestData.temperature;
           this.reading.humidity = latestData.humidity;
-          this.reading.pressure = latestData.pressureKPa; // or pressurePsi, based on your preference
+          this.reading.pressure = latestData.pressureKPa;
           this.reading.moisture = latestData.moisture;
           this.reading.co2 = latestData.co2;
           this.reading.pirstate = latestData.pirState;
