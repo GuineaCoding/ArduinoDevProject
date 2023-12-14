@@ -95,8 +95,8 @@ export class MoisturePage implements OnInit {
       datasets: [{
         label: 'Moisture Level',
         data: moistureLevels,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',  // Adjust the color as needed
-        borderColor: 'rgba(75, 192, 192, 1)',      // Adjust the color as needed
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',  
+        borderColor: 'rgba(75, 192, 192, 1)',      
         borderWidth: 1
       }]
     };
