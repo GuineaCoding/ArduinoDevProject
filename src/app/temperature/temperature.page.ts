@@ -81,9 +81,10 @@ export class TemperaturePage implements OnInit {
       this.minTemperature = Math.min(...temperatures);
       this.maxTemperature = Math.max(...temperatures);
     } else {
-      this.currentTemperature = 0; 
-      this.minTemperature = 0; 
-      this.maxTemperature = 0; 
+      // Handle the case where there are no valid temperature readings
+      this.currentTemperature = 0; // Or any default value you prefer
+      this.minTemperature = 0; // Or any default value you prefer
+      this.maxTemperature = 0; // Or any default value you prefer
     }
   
     this.setupTemperatureChart(labels, temperatures);
