@@ -12,7 +12,7 @@
         <ion-card (click)="navigateToDetail('temperature')">
         <ion-card-content>
           <h2>Temperature</h2>
-          <p>{{ reading.temperature }}</p>
+          <p>{{ reading.temperature.toFixed(2) }} °C</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
@@ -20,18 +20,16 @@
 
     <!-- Box 2: Humidity -->
     <ion-col size="6">
-      <ion-card>
-        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
+        <ion-card (click)="navigateToDetail('humidity')">
         <ion-card-content>
           <h2>Humidity</h2>
-          <p>{{ reading.humidity }}</p>
+          <p>{{ reading.humidity.toFixed(2) }} %</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
     </ion-col>
     <ion-col size="6">
-      <ion-card>
-        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
+      <ion-card (click)="navigateToDetail('pressure')">
         <ion-card-content>
           <h2>pressure</h2>
           <p>{{ reading.pressure}}</p>
@@ -41,8 +39,7 @@
     </ion-col>
 
     <ion-col size="6">
-      <ion-card>
-        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
+      <ion-card (click)="navigateToDetail('moisture')">
         <ion-card-content>
           <h2>moisture</h2>
           <p>{{ reading.moisture}}</p>

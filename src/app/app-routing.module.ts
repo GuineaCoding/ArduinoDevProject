@@ -29,6 +29,18 @@ const routes: Routes = [
   {
     path: 'temperature',
     loadChildren: () => import('./temperature/temperature.module').then( m => m.TemperaturePageModule)
+  },
+  {
+    path: 'humidity',
+    loadChildren: () => import('./humidity/humidity.module').then( m => m.HumidityPageModule)
+  },
+  {
+    path: 'pressure',
+    loadChildren: () => import('./pressure/pressure.module').then( m => m.PressurePageModule)
+  },
+  {
+    path: 'moisture',
+    loadChildren: () => import('./moisture/moisture.module').then( m => m.MoisturePageModule)
   }
 
 ];

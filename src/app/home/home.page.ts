@@ -59,9 +59,7 @@ export class HomePage implements OnInit {
   turnLedGreen() {
     this.firebaseService.setLedColorRed(false);
   }
-  navigateToDetail(sensorType: string) {
-    if (sensorType === 'temperature') {
-      this.router.navigateByUrl('/temperature');
-    }
-}
+  navigateToDetail(page: string) {
+    this.router.navigateByUrl('/' + page);
+  }
 }
