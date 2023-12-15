@@ -1,45 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="ion-text-center">Pressure</ion-title>
+    <ion-title class="ion-text-center">Sensor Data</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Pressure</ion-title>
+      <ion-title size="large">Sensor Data</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- Current Pressure -->
+  <!-- Sensor Data Information -->
   <ion-card class="dataContent">
     <ion-card-header>
-      <ion-card-title class="ion-text-center">Pressure Timeframe Information</ion-card-title>
+      <ion-card-title class="ion-text-center">Sensor Data Information</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <!-- Left Column -->
-          <ion-col size="6">
-            <ion-text color="secondary" class="pressure-info">
-              <h2 class="ion-text-center core-indicator-label">Current Pressure</h2>
-              <p class="ion-text-center main-indicator-label">{{ currentPressure?.toFixed(2) }} hPa</p>
-              <p class="ion-text-center core-indicator-label">Min Pressure</p>
-              <p class="ion-text-center main-indicator-label">{{ minPressure?.toFixed(2) }} hPa</p>
-              <p class="ion-text-center core-indicator-label">Max Pressure</p>
-              <p class="ion-text-center main-indicator-label">{{ maxPressure?.toFixed(2) }} hPa</p>
+          <!-- Sensor Data Column -->
+          <ion-col size="12">
+            <ion-text color="secondary" class="sensor-info">
+              <h2 class="ion-text-center core-indicator-label">Current Readings</h2>
+              <p class="ion-text-center main-indicator-label">CO2: {{ currentCO2?.toFixed(2) }} ppm</p>
+              <p class="ion-text-center main-indicator-label">Gas Resistance: {{ currentGasResistance?.toFixed(2) }} MΩ</p>
+              <p class="ion-text-center main-indicator-label">VOC: {{ currentVOC?.toFixed(2) }}</p>
             </ion-text>
-          </ion-col>
-          
-        
-          <ion-col size="6">
-            <ion-img src="/assets/images/pressurePngImage.png"></ion-img>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
 
+  <!-- Timeframe Selection Buttons -->
   <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="hour">
@@ -60,13 +54,13 @@
     </ion-segment>
   </ion-card>
 
-  <!-- Pressure Trend for the Current Day -->
+  <!-- Sensor Data Chart -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Pressure Trend</ion-card-title>
+      <ion-card-title>Sensor Data Trend</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <canvas id="pressureChart"></canvas>
+      <canvas id="sensorDataChart"></canvas>
     </ion-card-content>
   </ion-card>
 </ion-content>

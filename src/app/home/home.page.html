@@ -32,7 +32,7 @@
       <ion-card (click)="navigateToDetail('pressure')">
         <ion-card-content>
           <h2>pressure</h2>
-          <p>{{ reading.pressure}}</p>
+          <p>{{ reading.pressure.toFixed(2)}} hPa</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
@@ -49,7 +49,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-card>
-        <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
+        <ion-card (click)="navigateToDetail('air-quality')">
         <ion-card-content>
           <h2>CO2</h2>
           <p>{{ reading.co2 }}</p>

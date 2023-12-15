@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'moisture',
     loadChildren: () => import('./moisture/moisture.module').then( m => m.MoisturePageModule)
+  },
+  {
+    path: 'air-quality',
+    loadChildren: () => import('./air-quality/air-quality.module').then( m => m.AirQualityPageModule)
   }
 
 ];
