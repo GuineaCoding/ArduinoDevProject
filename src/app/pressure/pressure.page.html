@@ -31,7 +31,8 @@
             </ion-text>
           </ion-col>
           
-        
+          <!-- Right Column -->
+          <!-- Update the image if necessary -->
           <ion-col size="6">
             <ion-img src="/assets/images/pressurePngImage.png"></ion-img>
           </ion-col>
@@ -40,6 +41,7 @@
     </ion-card-content>
   </ion-card>
 
+  <!-- Timeframe Selection Buttons -->
   <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="hour">

@@ -1,32 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="ion-text-center">Sensor Data</ion-title>
+    <ion-title class="ion-text-center">Air Quality</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Sensor Data</ion-title>
+      <ion-title size="large">Air Quality</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- Sensor Data Information -->
+  <!-- Current Air Quality Data -->
   <ion-card class="dataContent">
     <ion-card-header>
-      <ion-card-title class="ion-text-center">Sensor Data Information</ion-card-title>
+      <ion-card-title class="ion-text-center">Air Quality Timeframe Information</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <!-- Sensor Data Column -->
-          <ion-col size="12">
-            <ion-text color="secondary" class="sensor-info">
-              <h2 class="ion-text-center core-indicator-label">Current Readings</h2>
-              <p class="ion-text-center main-indicator-label">CO2: {{ currentCO2?.toFixed(2) }} ppm</p>
-              <p class="ion-text-center main-indicator-label">Gas Resistance: {{ currentGasResistance?.toFixed(2) }} MΩ</p>
-              <p class="ion-text-center main-indicator-label">VOC: {{ currentVOC?.toFixed(2) }}</p>
+          <!-- Left Column -->
+          <ion-col size="6">
+            <ion-text color="secondary" class="air-quality-info">
+              <h2 class="ion-text-center core-indicator-label">Current CO2</h2>
+              <p class="ion-text-center main-indicator-label">{{ currentCO2?.toFixed(2) }} ppm</p>
+              <h2 class="ion-text-center core-indicator-label">Gas Resistance</h2>
+              <p class="ion-text-center main-indicator-label">{{ currentGasResistance?.toFixed(2) }} MΩ</p>
+              <h2 class="ion-text-center core-indicator-label">VOC</h2>
+              <p class="ion-text-center main-indicator-label">{{ currentVOC?.toFixed(2) }}</p>
             </ion-text>
+          </ion-col>
+          
+          <!-- Right Column -->
+          <ion-col size="6">
+            <!-- <ion-img src="/assets/images/airQualityImage.png"></ion-img> -->
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -54,13 +61,13 @@
     </ion-segment>
   </ion-card>
 
-  <!-- Sensor Data Chart -->
+  <!-- Air Quality Trend Chart -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Sensor Data Trend</ion-card-title>
+      <ion-card-title>Air Quality Trend</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <canvas id="sensorDataChart"></canvas>
+      <canvas id="airQualityChart"></canvas>
     </ion-card-content>
   </ion-card>
 </ion-content>

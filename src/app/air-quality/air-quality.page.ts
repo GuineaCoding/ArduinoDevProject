@@ -12,15 +12,15 @@ Chart.register(
 );
 
 @Component({
-  selector: 'app-sensor-data',
-  templateUrl: './sensor-data.page.html',
-  styleUrls: ['./sensor-data.page.scss'],
+  selector: 'app-air-quality', 
+  templateUrl: './air-quality.page.html', 
+  styleUrls: ['./air-quality.page.scss'], 
 })
-export class SensorDataPage implements OnInit {
+export class AirQualityPage implements OnInit { 
   currentCO2?: number;
   currentGasResistance?: number;
   currentVOC?: number;
-  sensorDataChart: any;
+  airQualityChart: any; 
 
   constructor(private sensorDataService: SensorDataService) { }
 
@@ -54,46 +54,71 @@ export class SensorDataPage implements OnInit {
   
     this.fetchSensorDataForTimeFrame('hours', hours, timeFrame);
   }
+
   fetchSensorDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
+      console.log('data1',data)
       this.processSensorData(data, selectedTimeFrame);
     }, error => {
       console.error('Error fetching sensor data:', error);
     });
   }
-
+  
   processSensorData(data: any[], selectedTimeFrame: string) {
-    const validData = data.filter(d => d.co2 && d.gasResistor && d.volatileOrganicCompounds);
-
-    const co2Data = validData.map(d => +d.co2);
-    const gasResistanceData = validData.map(d => +d.gasResistor / 1e6);  // Convert Ohms to Megaohms
+   
+    const validData = data.filter(d => !isNaN(+d.co2) && !isNaN(+d.gasResistor) && !isNaN(+d.volatileOrganicCompounds));
+  console.log('validData',validData)
+    const co2Data = validData.map(d => +d.co2 / 1000);
+    const gasResistanceData = validData.map(d => +d.gasResistor / 1e6);
     const vocData = validData.map(d => +d.volatileOrganicCompounds);
-
-    let labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleString(selectedTimeFrame === 'hour' || selectedTimeFrame === 'day' ? 'en-US' : undefined));
-
+    console.log('vocData', vocData)
+  
+    let labels;
+    if (selectedTimeFrame === 'hour' || selectedTimeFrame === 'day') {
+      labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleTimeString());
+    } else {
+      labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleString());
+    }
+  
+    if (co2Data.length > 0) {
+      this.currentCO2 = co2Data[co2Data.length - 1];
+    }
+    if (gasResistanceData.length > 0) {
+      this.currentGasResistance = gasResistanceData[gasResistanceData.length - 1];
+    }
+    if (vocData.length > 0) {
+      this.currentVOC = vocData[vocData.length - 1];
+    } else {
+      this.currentVOC = 0; 
+      this.currentGasResistance = 0; 
+      this.currentCO2 = 0; 
+    }
+  
     this.setupSensorDataChart(labels, co2Data, gasResistanceData, vocData);
   }
+  
+
+
   setupSensorDataChart(labels: string[], co2Data: number[], gasResistanceData: number[], vocData: number[]) {
     const data = {
       labels: labels,
       datasets: [
-  
         {
           label: 'CO2 (ppm)',
-          data: co2Data, // Assuming you have an array of CO2 data
+          data: co2Data,
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1,
         },
         {
           label: 'Gas Resistance (MΩ)',
-          data: gasResistanceData.map(resistance => resistance / 1e6), // Convert ohms to megaohms
+          data: gasResistanceData, 
           borderColor: 'rgba(255, 206, 86, 1)',
           borderWidth: 1,
         },
         {
           label: 'VOC',
-          data: vocData, // Assuming you have an array of VOC data
+          data: vocData,
           borderColor: 'rgba(153, 102, 255, 1)',
           borderWidth: 1,
         }
@@ -132,12 +157,12 @@ export class SensorDataPage implements OnInit {
       }
     };
 
-    const canvas = document.getElementById('sensorDataChart') as HTMLCanvasElement;
+    const canvas = document.getElementById('airQualityChart') as HTMLCanvasElement;
     if (canvas) {
-      if (this.sensorDataChart) {
-        this.sensorDataChart.destroy();
+      if (this.airQualityChart) {
+        this.airQualityChart.destroy();
       }
-      this.sensorDataChart = new Chart(canvas, {
+      this.airQualityChart = new Chart(canvas, {
         type: 'line',
         data: data,
         options: options
@@ -145,7 +170,8 @@ export class SensorDataPage implements OnInit {
     } else {
       console.error('Canvas element not found');
     }
+    console.log("Chart data object:", data);
+    console.log("Chart options object:", options);
   }
-
 
 }

@@ -47,9 +47,9 @@
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
     </ion-col>
+
     <ion-col size="6">
-      <ion-card>
-        <ion-card (click)="navigateToDetail('air-quality')">
+      <ion-card (click)="navigateToDetail('air-quality')">
         <ion-card-content>
           <h2>CO2</h2>
           <p>{{ reading.co2 }}</p>
@@ -57,7 +57,6 @@
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
     </ion-col>
-
   
     <ion-col size="6">
       <ion-card>
@@ -74,5 +73,5 @@
     <ion-button ion-col size="6" (click)="turnLedRed()">Turn Red</ion-button>
   </ion-col>
   <ion-col size="6"> <ion-button ion-col size="6" (click)="turnLedGreen()">Turn Green</ion-button></ion-col>
-
+`
 </ion-content>
