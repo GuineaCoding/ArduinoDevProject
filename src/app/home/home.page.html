@@ -52,7 +52,7 @@
       <ion-card (click)="navigateToDetail('air-quality')">
         <ion-card-content>
           <h2>CO2</h2>
-          <p>{{ reading.co2 }}</p>
+          <p>{{ reading.co2 / 1000}}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
       </ion-card>
@@ -62,7 +62,7 @@
       <ion-card>
         <!-- <ion-card (click)="navigateToDetail('temperature')"> -->
         <ion-card-content>
-          <h2>pirState</h2>
+          <h2>Security Status</h2>
           <p>{{ reading.pirstate }}</p>
         </ion-card-content>
         <ion-button expand="full">View Details</ion-button>
