@@ -24,3 +24,45 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+ion-segment-button {
+    --color: lightgreen; 
+    --color-checked: lightgreen; 
+    --background-checked: var(--ion-color-primary); 
+  }
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+.wrapped-label {
+  white-space: normal;
+  text-align: center;
+  word-wrap: normal;
+}
+
+
+.main-indicator-Label {
+  font-size: 20;
+}
+
+.core-indicator-Label {
+  font-size: 18;
+}
+
+.core-indicator-label {
+  font-size: 1.1em; 
+  margin-bottom: 0.5em; 
+  color: #007bff; 
+}
+
+.main-indicator-label {
+  font-size: 1em; 
+  margin-bottom: 1em; 
+}
+
+.temperature-info {
+  margin-top: 1em; 
+}
