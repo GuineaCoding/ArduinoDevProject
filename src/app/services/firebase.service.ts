@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,11 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 export class FirebaseService {
   constructor(private db: AngularFireDatabase) {}
 
-  setLedColorRed(isRed: boolean) {
-    return this.db.object('ledCommand/red').set(isRed);
+  setHolidayModeStatus(isOn: boolean): Promise<void> {
+    return this.db.object('holidayMode/status').set(isOn);
+  }
+
+  getHolidayModeState(): Observable<any> {
+    return this.db.object('holidayMode/status').valueChanges();
   }
 }

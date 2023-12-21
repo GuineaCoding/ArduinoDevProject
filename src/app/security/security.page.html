@@ -11,6 +11,22 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <h2 class="ion-text-center core-indicator-label">
+            Holiday Mode {{ holidayMode ? 'is On' : 'is Off' }}
+          </h2>
+        </ion-col>
+        <ion-col size="6" class="ion-text-center ion-align-self-center">
+          <ion-toggle [(ngModel)]="holidayMode" (ionChange)="toggleHolidayMode()"></ion-toggle>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  
+
   <!-- Current PIR State -->
   <ion-card class="dataContent">
     <ion-card-header>
@@ -26,17 +42,15 @@
               <p class="ion-text-center main-indicator-label">{{ currentpirState }}</p>
             </ion-text>
           </ion-col>
-          
+
           <!-- Right Column -->
           <ion-col size="6">
-            <!-- Placeholder for any related image or content -->
-            <!-- <ion-img src="/assets/images/pirStateImage.png"></ion-img> -->
+            <ion-img src="/assets/images/security.png"></ion-img>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
-
   <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="hour">
@@ -66,4 +80,3 @@
       <canvas id="pirStateChart"></canvas>
     </ion-card-content>
   </ion-card>
-</ion-content>

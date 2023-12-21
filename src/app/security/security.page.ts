@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, TimeScale, TimeSeriesScale } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import { SensorDataService } from '../services/sensor-data.service';
+import { FirebaseService } from '../services/firebase.service';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, TimeScale, TimeSeriesScale);
 
@@ -11,13 +12,18 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryS
   styleUrls: ['./security.page.scss'],
 })
 export class SecurityPage implements OnInit {
-  currentpirState?: number; 
+  currentpirState?: number;
   securityChart: any;
+  holidayMode!: boolean;
 
-  constructor(private sensorDataService: SensorDataService) { }
+  constructor(private sensorDataService: SensorDataService,
+    private firebaseService: FirebaseService,) { }
 
   ngOnInit() {
     this.fetchSecurityDataForTimeFrame('hours', 24, 'day');
+    this.firebaseService.getHolidayModeState().subscribe(state => {
+      this.holidayMode = !!state; // Update based on Firebase
+    });
   }
 
   updateTimeFrame(eventDetail: any) {
@@ -43,7 +49,7 @@ export class SecurityPage implements OnInit {
         console.error('Invalid time frame specified: ', timeFrame);
         return;
     }
-  
+
     this.fetchSecurityDataForTimeFrame('hours', hours, timeFrame);
   }
 
@@ -56,12 +62,12 @@ export class SecurityPage implements OnInit {
   }
 
   processSecurityData(data: any[], selectedTimeFrame: string) {
-    // Example processing logic
-    const securityData = data.map(d => d.pirState); 
+   
+    const securityData = data.map(d => d.pirState);
 
     let labels = data.map(d => new Date(d.timestamp * 1000).toLocaleString());
 
- 
+
     this.currentpirState = securityData.length > 0 ? securityData[securityData.length - 1] : null;
 
     this.setupSecurityChart(labels, securityData);
@@ -111,5 +117,19 @@ export class SecurityPage implements OnInit {
     } else {
       console.error('Canvas element not found');
     }
+
   }
+  toggleHolidayMode() {
+    this.firebaseService.setHolidayModeStatus(this.holidayMode);
+  }
+  turnHolidayModeOn() {
+    this.firebaseService.setHolidayModeStatus(true);
+    this.holidayMode = true;
+  }
+  turnHolidayModeOff() {
+    this.firebaseService.setHolidayModeStatus(false);
+  }
+
 }
+
+

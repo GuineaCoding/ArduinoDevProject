@@ -32,3 +32,12 @@ canvas {
 .temperature-info {
   margin-top: 1em; 
 }
+
+.core-indicator-label {
+  font-size: 1.2em;
+  color: var(--ion-color-primary);
+}
+
+ion-toggle {
+  margin-top: 10px; 
+}

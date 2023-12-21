@@ -50,15 +50,7 @@ export class HomePage implements OnInit {
         }
       });
   }
-  
 
-  turnLedRed() {
-    this.firebaseService.setLedColorRed(true);
-  }
-
-  turnLedGreen() {
-    this.firebaseService.setLedColorRed(false);
-  }
   navigateToDetail(page: string) {
     this.router.navigateByUrl('/' + page);
   }
