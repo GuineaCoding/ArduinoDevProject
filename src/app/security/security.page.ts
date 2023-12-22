@@ -110,6 +110,7 @@ export class SecurityPage implements OnInit {
 
     const canvas = document.getElementById('pirStateChart') as HTMLCanvasElement;
     if (canvas) {
+      canvas.height = 300;
       if (this.securityChart) {
         this.securityChart.destroy();
       }

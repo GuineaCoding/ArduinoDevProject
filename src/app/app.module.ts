@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat'; // Firebase Core
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // Firebase Auth
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; // Firebase Realtime Database
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging'; // Firebase Messaging
 import { environment } from '../environments/environment'; // Firebase Configuration
 
 // Import FirebaseService
@@ -23,6 +24,7 @@ import { FirebaseService } from './services/firebase.service';
     AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase with config
     AngularFireAuthModule, // Firebase Authentication
     AngularFireDatabaseModule, // Firebase Realtime Database
+    AngularFireMessagingModule, // Firebase Messaging
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

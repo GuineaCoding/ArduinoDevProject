@@ -159,6 +159,7 @@ export class AirQualityPage implements OnInit {
 
     const canvas = document.getElementById('airQualityChart') as HTMLCanvasElement;
     if (canvas) {
+      canvas.height = 300;
       if (this.airQualityChart) {
         this.airQualityChart.destroy();
       }
