@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private router: Router,
-    private afDB: AngularFireDatabase
+    private afDB: AngularFireDatabase,
+    private authService: AuthService
     
   ) {}
 
@@ -38,7 +40,7 @@ export class HomePage implements OnInit {
           const latestTimestamp = Math.max(...Object.keys(data).map(Number));
           const latestData = data[latestTimestamp];
   
-          // Now assign the values from the latest data
+          // assign the values from the latest data
           this.reading.temperature = latestData.temperature;
           this.reading.humidity = latestData.humidity;
           this.reading.pressure = latestData.pressureKPa * 10;
@@ -51,7 +53,23 @@ export class HomePage implements OnInit {
       });
   }
 
+  getCo2LevelColor(co2: number): string {
+    if (co2 < 1000) return 'green'; // Low CO2
+    if (co2 >= 1000 && co2 < 2000) return 'yellow'; // Moderate CO2
+    return 'red'; // High CO2
+  }
+
   navigateToDetail(page: string) {
     this.router.navigateByUrl('/' + page);
+  }
+  logout() {
+    this.authService.logout();
+  }
+  getPirStateLabel(pirState: number): string {
+    return pirState === 1 ? 'Motion Detected' : 'No Motion Detected';
+  }
+
+  getPirStateColor(pirState: number): string {
+    return pirState === 1 ? 'red' : 'green';
   }
 }

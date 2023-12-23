@@ -5,19 +5,42 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="login()">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-    </ion-item>
-    <ion-button expand="block" type="submit">Login</ion-button>
-  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-img src="assets/images/appLogo.png"></ion-img> 
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <h2>Welcome Back!</h2>
+        <p>Please login to continue</p>
+      </ion-col>
+    </ion-row>
 
-  <!-- Add the Sign Up button below the form -->
-  <ion-button expand="block" (click)="goToSignUpPage()">Sign Up</ion-button>
-  <ion-button expand="block" (click)="forgotPassword()">Forgot Password?</ion-button>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <form (ngSubmit)="login()">
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+            </ion-item>
+            <ion-button expand="block" type="submit">Login</ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-button expand="block" (click)="goToSignUpPage()">Sign Up</ion-button>
+          <ion-button expand="block" (click)="forgotPassword()">Forgot Password?</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

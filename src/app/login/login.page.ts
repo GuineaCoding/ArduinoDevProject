@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController,LoadingController  } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -19,14 +19,23 @@ export class LoginPage {
     private afAuth: AngularFireAuth, 
     private router: Router,
     private authService: AuthService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadingController: LoadingController
   ) {}
 
   async login() {
+    const loading = await this.loadingController.create({
+      message: 'Logging in...',
+      spinner: 'circles'
+    });
+    await loading.present();
+  
     try {
       await this.afAuth.signInWithEmailAndPassword(this.email, this.password);
+      await loading.dismiss();
       this.router.navigateByUrl('/home');
     } catch (error) {
+      await loading.dismiss(); 
       this.showErrorAlert();
       console.error(error);
     }

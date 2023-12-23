@@ -43,7 +43,9 @@
           <ion-col size="6">
             <ion-text color="secondary" class="pir-state-info">
               <h2 class="ion-text-center core-indicator-label">Current PIR State</h2>
-              <p class="ion-text-center main-indicator-label">{{ currentpirState }}</p>
+              <!-- rendering based on data availability -->
+              <p *ngIf="currentpirState != null" class="ion-text-center main-indicator-label">{{ currentpirState }}</p>
+              <p *ngIf="currentpirState == null" class="ion-text-center">No data available for this timeframe.</p>
             </ion-text>
           </ion-col>
 
@@ -83,4 +85,25 @@
     <ion-card-content>
       <canvas id="pirStateChart"></canvas>
     </ion-card-content>
+    
   </ion-card>
+  <ion-card>
+  <ion-card-header>
+    <ion-card-title>PIR State Legend</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <div class="legend-indicator" style="background-color: green;  height: 10px;"></div>
+          <p class="legend-text">Movement Not Detected (PIR State: 0)</p>
+        </ion-col>
+        <ion-col size="6">
+          <div class="legend-indicator" style="background-color: red; height: 10px;"></div>
+          <p class="legend-text">Movement Detected (PIR State: 1)</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+</ion-content>

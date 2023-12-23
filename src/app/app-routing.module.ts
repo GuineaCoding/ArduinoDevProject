@@ -19,38 +19,43 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthGuard] // Protect the 'home' route
+    canActivate: [AuthGuard]
   },
   {
     path: 'sensor-data',
     loadChildren: () => import('./pages/sensor-data/sensor-data.module').then(m => m.SensorDataPageModule),
-    canActivate: [AuthGuard] // Protect the 'sensor-data' route
+    canActivate: [AuthGuard]
   },
   {
     path: 'temperature',
-    loadChildren: () => import('./temperature/temperature.module').then( m => m.TemperaturePageModule)
+    loadChildren: () => import('./temperature/temperature.module').then(m => m.TemperaturePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'humidity',
-    loadChildren: () => import('./humidity/humidity.module').then( m => m.HumidityPageModule)
+    loadChildren: () => import('./humidity/humidity.module').then(m => m.HumidityPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'pressure',
-    loadChildren: () => import('./pressure/pressure.module').then( m => m.PressurePageModule)
+    loadChildren: () => import('./pressure/pressure.module').then(m => m.PressurePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'moisture',
-    loadChildren: () => import('./moisture/moisture.module').then( m => m.MoisturePageModule)
+    loadChildren: () => import('./moisture/moisture.module').then(m => m.MoisturePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'air-quality',
-    loadChildren: () => import('./air-quality/air-quality.module').then( m => m.AirQualityPageModule)
+    loadChildren: () => import('./air-quality/air-quality.module').then(m => m.AirQualityPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'security',
-    loadChildren: () => import('./security/security.module').then( m => m.SecurityPageModule)
+    loadChildren: () => import('./security/security.module').then(m => m.SecurityPageModule),
+    canActivate: [AuthGuard]
   }
-
 ];
 
 @NgModule({

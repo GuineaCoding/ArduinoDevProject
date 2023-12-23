@@ -11,6 +11,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // Firebase A
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; // Firebase Realtime Database
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging'; // Firebase Messaging
 import { environment } from '../environments/environment'; // Firebase Configuration
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Import FirebaseService
 import { FirebaseService } from './services/firebase.service';
@@ -25,6 +26,8 @@ import { FirebaseService } from './services/firebase.service';
     AngularFireAuthModule, // Firebase Authentication
     AngularFireDatabaseModule, // Firebase Realtime Database
     AngularFireMessagingModule, // Firebase Messaging
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

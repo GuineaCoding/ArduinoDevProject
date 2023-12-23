@@ -74,7 +74,7 @@ export class SecurityPage implements OnInit {
   }
 
   setupSecurityChart(labels: string[], securityData: number[]) {
-    // Setup your chart here
+    // Setup chart here
     const data = {
       labels: labels,
       datasets: [{
