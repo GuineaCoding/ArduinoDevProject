@@ -121,3 +121,4 @@ android/app/src/test/java/com/getcapacitor/myapp/ExampleUnitTest.java
 android/gradle/wrapper/gradle-wrapper.jar
 android/gradle/wrapper/gradle-wrapper.properties
 src/environments/environment.prod.ts
+src/environments/environment.ts
