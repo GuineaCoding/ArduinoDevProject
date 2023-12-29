@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title  class="ion-text-center">Moisture</ion-title>
+    <ion-title  class="ion-text-center">My Ficus Soil Moisture</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Moisture</ion-title>
+      <ion-title size="large">My Ficus Soil Moisture</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -73,4 +73,36 @@
       <canvas id="moistureChart"></canvas>
     </ion-card-content>
   </ion-card>
+
+    <!-- Moisture Level Legend -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Moisture Level Legend</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <!-- Good Level Moisture -->
+          <ion-row>
+            <ion-col size="12">
+              <p class="white-text">Good Level Moisture (0 - 400)</p>
+              <div class="legend-indicator" style="background-color: green;"></div>
+            </ion-col>
+          </ion-row>
+          <!-- Medium Level Moisture -->
+          <ion-row>
+            <ion-col size="12">
+              <p class="white-text">Medium Level Moisture (401 - 700)</p>
+              <div class="legend-indicator" style="background-color: yellow;"></div>
+            </ion-col>
+          </ion-row>
+          <!-- Low Level Moisture -->
+          <ion-row>
+            <ion-col size="12">
+              <p class="white-text">Low Level Moisture (Above 700)</p>
+              <div class="legend-indicator" style="background-color: red;"></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
 </ion-content>
