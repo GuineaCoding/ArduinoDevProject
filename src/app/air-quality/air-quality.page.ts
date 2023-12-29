@@ -1,33 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import {
+    // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
-import 'chartjs-adapter-date-fns';
+import 'chartjs-adapter-date-fns'; // Adapter for date functionality in Chart.js
 import { SensorDataService } from '../services/sensor-data.service';
 
+// Registering Chart.js components to be used in creating the chart
 Chart.register(
   LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 );
 
 @Component({
-  selector: 'app-air-quality', 
-  templateUrl: './air-quality.page.html', 
-  styleUrls: ['./air-quality.page.scss'], 
+  selector: 'app-air-quality',  // Component selector used in HTML
+  templateUrl: './air-quality.page.html',  // HTML template for the component
+  styleUrls: ['./air-quality.page.scss'],  // Styles for the component
 })
+
+// Properties to store current, minimum, and maximum readings
 export class AirQualityPage implements OnInit { 
   currentCO2?: number;
   currentGasResistance?: number;
   currentVOC?: number;
   airQualityChart: any; 
 
+  // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
+    // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchSensorDataForTimeFrame('hours', 24, 'day');
   }
 
+// Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -54,7 +61,7 @@ export class AirQualityPage implements OnInit {
   
     this.fetchSensorDataForTimeFrame('hours', hours, timeFrame);
   }
-
+// Method to fetch data for a given time frame
   fetchSensorDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
@@ -65,6 +72,7 @@ export class AirQualityPage implements OnInit {
     });
   }
   
+  // Method to process  data and prepare it for the chart
   processSensorData(data: any[], selectedTimeFrame: string) {
    
     const validData = data.filter(d => !isNaN(+d.co2) && !isNaN(+d.gasResistor) && !isNaN(+d.volatileOrganicCompounds));
@@ -99,7 +107,7 @@ export class AirQualityPage implements OnInit {
   }
   
 
-
+ // Method to set up the data chart using Chart.js
   setupSensorDataChart(labels: string[], co2Data: number[], gasResistanceData: number[], vocData: number[]) {
     const data = {
       labels: labels,
@@ -159,7 +167,7 @@ export class AirQualityPage implements OnInit {
 
     const canvas = document.getElementById('airQualityChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 300;
+      canvas.height = 350;
       if (this.airQualityChart) {
         this.airQualityChart.destroy();
       }

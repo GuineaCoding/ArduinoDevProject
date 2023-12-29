@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title  class="ion-text-center">My Ficus Soil Moisture</ion-title>
+    <ion-title>My Ficus Soil Moisture</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -45,6 +45,11 @@
 
   <!-- Timeframe Selection Buttons -->
   <ion-card>
+    <ion-text color="warning">
+    <h2 class="ion-text-center">Chose timeframe</h2>
+  </ion-text>
+  </ion-card>
+  <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="hour">
         <ion-label class="ion-text-wrap">Last Hour</ion-label>
@@ -52,6 +57,11 @@
       <ion-segment-button value="day">
         <ion-label class="ion-text-wrap">Last Day</ion-label>
       </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <ion-card>
+    <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="week">
         <ion-label class="ion-text-wrap">Last Week</ion-label>
       </ion-segment-button>

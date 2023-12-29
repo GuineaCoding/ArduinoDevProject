@@ -1,24 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+  // Importing Chart.js components required for creating the chart
 import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, TimeScale, TimeSeriesScale } from 'chart.js';
-import 'chartjs-adapter-date-fns';
+import 'chartjs-adapter-date-fns'; // Adapter for date functionality in Chart.js
 import { SensorDataService } from '../services/sensor-data.service';
 import { FirebaseService } from '../services/firebase.service';
 
+// Registering Chart.js components to be used in creating the chart
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, TimeScale, TimeSeriesScale);
 
 @Component({
-  selector: 'app-security',
-  templateUrl: './security.page.html',
-  styleUrls: ['./security.page.scss'],
+  selector: 'app-security', // Component selector used in HTML
+  templateUrl: './security.page.html', // HTML template for the component
+  styleUrls: ['./security.page.scss'], // Styles for the component
 })
+
+// Properties to store current readings
 export class SecurityPage implements OnInit {
   currentpirState?: number;
-  securityChart: any;
-  holidayMode!: boolean;
+  securityChart: any; // Property to hold the Chart.js chart instance
+  holidayMode!: boolean; 
 
+  // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService,
     private firebaseService: FirebaseService,) { }
 
+    // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchSecurityDataForTimeFrame('hours', 24, 'day');
     this.firebaseService.getHolidayModeState().subscribe(state => {
@@ -26,6 +32,7 @@ export class SecurityPage implements OnInit {
     });
   }
 
+// Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -53,6 +60,7 @@ export class SecurityPage implements OnInit {
     this.fetchSecurityDataForTimeFrame('hours', hours, timeFrame);
   }
 
+  // Method to fetch data for a given time frame
   fetchSecurityDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     this.sensorDataService.getSensorDataForLastHours(value).subscribe(data => {
       this.processSecurityData(data, selectedTimeFrame);
@@ -61,6 +69,7 @@ export class SecurityPage implements OnInit {
     });
   }
 
+// Method to process  data and prepare it for the chart
   processSecurityData(data: any[], selectedTimeFrame: string) {
    
     const securityData = data.map(d => d.pirState);
@@ -73,6 +82,7 @@ export class SecurityPage implements OnInit {
     this.setupSecurityChart(labels, securityData);
   }
 
+   // Method to set up the data chart using Chart.js
   setupSecurityChart(labels: string[], securityData: number[]) {
     // Setup chart here
     const data = {
@@ -110,7 +120,7 @@ export class SecurityPage implements OnInit {
 
     const canvas = document.getElementById('pirStateChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 300;
+      canvas.height = 350;
       if (this.securityChart) {
         this.securityChart.destroy();
       }

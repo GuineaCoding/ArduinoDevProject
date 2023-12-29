@@ -1,33 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import {
+    // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
 import 'chartjs-adapter-date-fns';  // Import the date adapter
 import { SensorDataService } from '../services/sensor-data.service';
 
+// Registering Chart.js components to be used in creating the chart
 Chart.register(
   LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 );
 
 @Component({
-  selector: 'app-temperature',
-  templateUrl: './temperature.page.html',
-  styleUrls: ['./temperature.page.scss'],
+  selector: 'app-temperature', // Component selector used in HTML
+  templateUrl: './temperature.page.html', // HTML template for the component
+  styleUrls: ['./temperature.page.scss'], // Styles for the component
 })
+
+// Properties to store current, minimum, and maximum readings
 export class TemperaturePage implements OnInit {
   currentTemperature?: number;
   minTemperature?: number;
   maxTemperature?: number;
   temperatureChart: any;
 
+  // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
+    // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchTemperatureDataForTimeFrame('hours', 24, 'day');
   }
 
+// Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -55,7 +62,7 @@ export class TemperaturePage implements OnInit {
     this.fetchTemperatureDataForTimeFrame('hours', hours, timeFrame);
   }
   
-
+// Method to fetch data for a given time frame
   fetchTemperatureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
@@ -65,6 +72,7 @@ export class TemperaturePage implements OnInit {
     });
   }
 
+  // Method to process  data and prepare it for the chart
   processTemperatureData(data: any[], selectedTimeFrame: string) {
     const validData = data.filter(d => !isNaN(+d.temperature));
     const temperatures = validData.map(d => +d.temperature);
@@ -90,6 +98,7 @@ export class TemperaturePage implements OnInit {
     this.setupTemperatureChart(labels, temperatures);
   }
 
+   // Method to set up the data chart using Chart.js
   setupTemperatureChart(labels: string[], temperatures: number[]) {
   
     const data = {
@@ -141,7 +150,7 @@ export class TemperaturePage implements OnInit {
     
     const canvas = document.getElementById('temperatureChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 300;  
+      canvas.height = 400;  
       this.temperatureChart = new Chart(canvas, {
         type: 'line',
         data: data,

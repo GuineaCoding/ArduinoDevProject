@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title  class="ion-text-center">Security Status</ion-title>
+    <ion-title>Security Status</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -57,6 +57,13 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+
+  <!-- Timeframe Selection Buttons -->
+  <ion-card>
+    <ion-text color="warning">
+    <h2 class="ion-text-center">Chose timeframe</h2>
+  </ion-text>
+  </ion-card>
   <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="hour">
@@ -65,6 +72,11 @@
       <ion-segment-button value="day">
         <ion-label class="ion-text-wrap">Last Day</ion-label>
       </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <ion-card>
+    <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="week">
         <ion-label class="ion-text-wrap">Last Week</ion-label>
       </ion-segment-button>

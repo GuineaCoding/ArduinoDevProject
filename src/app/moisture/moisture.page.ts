@@ -1,33 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import {
+    // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
-import 'chartjs-adapter-date-fns';
+import 'chartjs-adapter-date-fns'; // Adapter for date functionality in Chart.js
 import { SensorDataService } from '../services/sensor-data.service';
 
+// Registering Chart.js components to be used in creating the chart
 Chart.register(
   LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 );
 
 @Component({
-  selector: 'app-moisture',
-  templateUrl: './moisture.page.html',
-  styleUrls: ['./moisture.page.scss'],
+  selector: 'app-moisture', // Component selector used in HTML
+  templateUrl: './moisture.page.html', // HTML template for the component
+  styleUrls: ['./moisture.page.scss'], // Styles for the component
 })
+
+// Properties to store current, minimum, and maximum readings
 export class MoisturePage implements OnInit {
   currentMoisture?: number;
   minMoisture?: number;
   maxMoisture?: number;
-  moistureChart: any;
+  moistureChart: any; // Property to hold the Chart.js chart instance
 
+  // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
+
+  // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchMoistureDataForTimeFrame('hours', 24, 'day');
   }
 
+// Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -55,6 +63,7 @@ export class MoisturePage implements OnInit {
     this.fetchMoistureDataForTimeFrame('hours', hours, timeFrame);
   }
   
+  // Method to fetch data for a given time frame
   fetchMoistureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value); 
 
@@ -65,6 +74,7 @@ export class MoisturePage implements OnInit {
     }); 
   }
  
+  // Method to process  pressure data and prepare it for the chart
   processMoistureData(data: any[], selectedTimeFrame: string) {
     const validData = data.filter(d => !isNaN(+d.moisture));
     const moistureLevels = validData.map(d => +d.moisture);
@@ -89,6 +99,7 @@ export class MoisturePage implements OnInit {
     this.setupMoistureChart(labels, moistureLevels);
   }
 
+   // Method to set up the data chart using Chart.js
   setupMoistureChart(labels: string[], moistureLevels: number[]) {
     const data = {
       labels: labels,
@@ -136,7 +147,7 @@ export class MoisturePage implements OnInit {
     
     const canvas = document.getElementById('moistureChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 300;
+      canvas.height = 350;
 
       this.moistureChart = new Chart(canvas, {
         type: 'line',

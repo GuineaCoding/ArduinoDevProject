@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title  class="ion-text-center">Air Quality</ion-title>
+    <ion-title>Air Quality</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -45,6 +45,11 @@
 
   <!-- Timeframe Selection Buttons -->
   <ion-card>
+    <ion-text color="warning">
+    <h2 class="ion-text-center">Chose timeframe</h2>
+  </ion-text>
+  </ion-card>
+  <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="hour">
         <ion-label class="ion-text-wrap">Last Hour</ion-label>
@@ -52,6 +57,11 @@
       <ion-segment-button value="day">
         <ion-label class="ion-text-wrap">Last Day</ion-label>
       </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <ion-card>
+    <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="week">
         <ion-label class="ion-text-wrap">Last Week</ion-label>
       </ion-segment-button>
@@ -83,55 +93,55 @@
         <!-- CO2 Levels Legend -->
         <ion-row>
           <ion-col size="12">
-            <h3>CO2 Levels</h3>
+            <h3 class="white-text">CO2 Levels</h3>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="4">
             <div class="legend-indicator" style="background-color: green;"></div>
-            <p>Low (0 - 1000 ppm)</p>
+            <p class="white-text">Low (0 - 1000 ppm)</p>
           </ion-col>
           <ion-col size="4">
             <div class="legend-indicator" style="background-color: yellow;"></div>
-            <p>Moderate (1000 - 2000 ppm)</p>
+            <p class="white-text">Moderate (1000 - 2000 ppm)</p>
           </ion-col>
           <ion-col size="4">
             <div class="legend-indicator" style="background-color: red;"></div>
-            <p>High (Above 2000 ppm)</p>
+            <p class="white-text">High (Above 2000 ppm)</p>
           </ion-col>
         </ion-row>
 
         <!-- Gas Resistance Legend -->
         <ion-row>
           <ion-col size="12">
-            <h3>Gas Resistance</h3>
+            <h3 class="white-text">Gas Resistance</h3>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="6">
             <div class="legend-indicator" style="background-color: blue;"></div>
-            <p>Normal (0 - 50 MΩ)</p>
+            <p class="white-text">Normal (0 - 50 MΩ)</p>
           </ion-col>
           <ion-col size="6">
             <div class="legend-indicator" style="background-color: orange;"></div>
-            <p>Elevated (Above 50 MΩ)</p>
+            <p class="white-text">Elevated (Above 50 MΩ)</p>
           </ion-col>
         </ion-row>
 
         <!-- VOC Legend -->
         <ion-row>
           <ion-col size="12">
-            <h3>Volatile Organic Compounds (VOC)</h3>
+            <h3 class="white-text">Volatile Organic Compounds (VOC)</h3>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="6">
             <div class="legend-indicator" style="background-color: purple;"></div>
-            <p>Acceptable (0 - 0.5 mg/m³)</p>
+            <p class="white-text">Acceptable (0 - 0.5 mg/m³)</p>
           </ion-col>
           <ion-col size="6">
             <div class="legend-indicator" style="background-color: brown;"></div>
-            <p>High (Above 0.5 mg/m³)</p>
+            <p class="white-text">High (Above 0.5 mg/m³)</p>
           </ion-col>
         </ion-row>
       </ion-grid>

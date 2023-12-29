@@ -7,11 +7,13 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-home', // Component's CSS element selector
+  templateUrl: './home.page.html', // The HTML template file for this component
+  styleUrls: ['./home.page.scss'], // The stylesheet for this component
 })
+
 export class HomePage implements OnInit {
+  // Object to store the latest sensor readings
   reading = {
     temperature: 0,
     humidity: 0,
@@ -22,18 +24,19 @@ export class HomePage implements OnInit {
   };
 
   constructor(
-    private firebaseService: FirebaseService,
-    private router: Router,
-    private afDB: AngularFireDatabase,
-    private authService: AuthService
-    
+    private firebaseService: FirebaseService, // Service for Firebase operations
+    private router: Router, // Angular Router for navigation
+    private afDB: AngularFireDatabase, // AngularFireDatabase for interacting with Firebase Database
+    private authService: AuthService // Service for authentication operations
   ) {}
 
+   // ngOnInit lifecycle hook to load data when component initializes
   ngOnInit() {
+    // Fetching the last sensor reading from Firebase
     this.afDB
-      .list('sensorReadings', ref => ref.limitToLast(1))
-      .valueChanges()
-      .subscribe((data: any) => {
+      .list('sensorReadings', ref => ref.limitToLast(1)) // Querying the last entry
+      .valueChanges() // Listening for changes
+      .subscribe((data: any) => { // Subscribing to data changes
         console.log('Data from Firebase:', data);
         if (data) {
           // Get the latest timestamp key
@@ -53,22 +56,27 @@ export class HomePage implements OnInit {
       });
   }
 
+// Function to determine CO2 level color based on value
   getCo2LevelColor(co2: number): string {
     if (co2 < 1000) return 'green'; // Low CO2
     if (co2 >= 1000 && co2 < 2000) return 'yellow'; // Moderate CO2
     return 'red'; // High CO2
   }
 
+// Function to navigate to a detailed page
   navigateToDetail(page: string) {
     this.router.navigateByUrl('/' + page);
   }
   logout() {
     this.authService.logout();
   }
+
+// Function to get label for PIR state
   getPirStateLabel(pirState: number): string {
     return pirState === 1 ? 'Motion Detected' : 'No Motion Detected';
   }
 
+// Function to get color based on PIR state
   getPirStateColor(pirState: number): string {
     return pirState === 1 ? 'red' : 'green';
   }

@@ -16,7 +16,9 @@ ion-segment-button {
   --color-checked: lightgreen; 
   --background-checked: var(--ion-color-primary); 
 }
-
+.textWhite{
+  --ion-color-primary: white;
+}
 
 .main-indicator-Label {
   font-size: 20;

@@ -23,7 +23,6 @@
       <ion-grid>
         <ion-row>
           <!-- Left Column -->
-
           <ion-col size="6">
             <ion-text color="secondary" class="temperature-info">
               <h2 class="ion-text-center core-indicator-label">Current Temperature</h2>
@@ -34,8 +33,6 @@
               <p class="ion-text-center main-indicator-label">{{ maxTemperature?.toFixed(2) }} °C</p>
             </ion-text>
           </ion-col>
-          
-
           <!-- Right Column -->
           <ion-col size="6">
             <ion-img src="/assets/images/thermometerPngImage.png"></ion-img> 
@@ -47,6 +44,11 @@
 
   <!-- Timeframe Selection Buttons -->
   <ion-card>
+    <ion-text color="warning">
+    <h2 class="ion-text-center">Chose timeframe</h2>
+  </ion-text>
+  </ion-card>
+  <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="hour">
         <ion-label class="ion-text-wrap">Last Hour</ion-label>
@@ -54,6 +56,11 @@
       <ion-segment-button value="day">
         <ion-label class="ion-text-wrap">Last Day</ion-label>
       </ion-segment-button>
+    </ion-segment>
+  </ion-card>
+
+  <ion-card>
+    <ion-segment (ionChange)="updateTimeFrame($event.detail)">
       <ion-segment-button value="week">
         <ion-label class="ion-text-wrap">Last Week</ion-label>
       </ion-segment-button>
@@ -64,9 +71,7 @@
         <ion-label class="ion-text-wrap">Last Year</ion-label>
       </ion-segment-button>
     </ion-segment>
-
   </ion-card>
-
   <!-- Temperature Trend for the Current Day -->
   <ion-card>
     <ion-card-header>
@@ -74,6 +79,5 @@
     </ion-card-header>
     <ion-card-content>
       <canvas id="temperatureChart"></canvas>
-
     </ion-card-content>
   </ion-card>

@@ -1,33 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import {
+    // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
-import 'chartjs-adapter-date-fns';
+import 'chartjs-adapter-date-fns'; // Adapter for date functionality in Chart.js
 import { SensorDataService } from '../services/sensor-data.service';
 
+// Registering Chart.js components to be used in creating the chart
 Chart.register(
   LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 );
 
 @Component({
-  selector: 'app-humidity',
-  templateUrl: './humidity.page.html',
-  styleUrls: ['./humidity.page.scss'],
+  selector: 'app-humidity', // Component selector used in HTML
+  templateUrl: './humidity.page.html', // HTML template for the component
+  styleUrls: ['./humidity.page.scss'], // Styles for the component
 })
+
+// Properties to store current, minimum, and maximum readings
 export class HumidityPage implements OnInit {
   currentHumidity?: number;
   minHumidity?: number;
   maxHumidity?: number;
   humidityChart: any;
 
+// Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
+// ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchHumidityDataForTimeFrame('hours', 24, 'day');
-  }
+  };
 
+// Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -55,6 +62,7 @@ export class HumidityPage implements OnInit {
     this.fetchHumidityDataForTimeFrame('hours', hours, timeFrame);
   }
   
+  // Method to fetch data for a given time frame
   fetchHumidityDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value); 
     observable$.subscribe(data => {
@@ -64,6 +72,7 @@ export class HumidityPage implements OnInit {
     });
   }
 
+  // Method to process  data and prepare it for the chart
   processHumidityData(data: any[], selectedTimeFrame: string) {
     const validData = data.filter(d => !isNaN(+d.humidity));
     const humidities = validData.map(d => +d.humidity);
@@ -88,6 +97,7 @@ export class HumidityPage implements OnInit {
     this.setupHumidityChart(labels, humidities);
   }
 
+   // Method to set up the data chart using Chart.js
   setupHumidityChart(labels: string[], humidities: number[]) {
   
     const data = {
@@ -138,7 +148,7 @@ export class HumidityPage implements OnInit {
     
     const canvas = document.getElementById('humidityChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 300;
+      canvas.height = 400;
 
       this.humidityChart = new Chart(canvas, {
         type: 'line',

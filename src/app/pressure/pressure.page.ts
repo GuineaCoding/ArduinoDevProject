@@ -1,33 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
-import 'chartjs-adapter-date-fns';
+import 'chartjs-adapter-date-fns'; // Adapter for date functionality in Chart.js
 import { SensorDataService } from '../services/sensor-data.service';
 
+// Registering Chart.js components to be used in creating the chart
 Chart.register(
   LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 );
 
 @Component({
-  selector: 'app-pressure',
-  templateUrl: './pressure.page.html',
-  styleUrls: ['./pressure.page.scss'],
+  selector: 'app-pressure', // Component selector used in HTML
+  templateUrl: './pressure.page.html', // HTML template for the component
+  styleUrls: ['./pressure.page.scss'], // Styles for the component
 })
+
+// Properties to store current, minimum, and maximum readings
 export class PressurePage implements OnInit {
   currentPressure?: number;
   minPressure?: number;
   maxPressure?: number;
   pressureChart: any;
 
+// Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
+// ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchPressureDataForTimeFrame('hours', 24, 'day');
-  }
+  };
 
+// Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -55,6 +62,7 @@ export class PressurePage implements OnInit {
     this.fetchPressureDataForTimeFrame('hours', hours, timeFrame);
   }
   
+    // Method to fetch data for a given time frame
   fetchPressureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
@@ -64,6 +72,7 @@ export class PressurePage implements OnInit {
     });
   }
 
+  // Method to process  data and prepare it for the chart
   processPressureData(data: any[], selectedTimeFrame: string) {
     const validData = data.filter(d => !isNaN(+d.pressureKPa));
     const pressures = validData.map(d => +d.pressureKPa * 10);  // Convert from kPa to hPa
@@ -88,6 +97,7 @@ export class PressurePage implements OnInit {
     this.setupPressureChart(labels, pressures);
   }
 
+  // Method to set up the data chart using Chart.js
   setupPressureChart(labels: string[], pressures: number[]) {
     const data = {
       labels: labels,
@@ -135,7 +145,7 @@ export class PressurePage implements OnInit {
     
     const canvas = document.getElementById('pressureChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 300;
+      canvas.height = 350;
       this.pressureChart = new Chart(canvas, {
         type: 'line',
         data: data,
