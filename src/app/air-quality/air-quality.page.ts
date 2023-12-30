@@ -19,6 +19,7 @@ Chart.register(
   styleUrls: ['./air-quality.page.scss'],  // Styles for the component
 })
 
+
 // Properties to store current, minimum, and maximum readings
 export class AirQualityPage implements OnInit {
   currentCO2?: number;
@@ -26,9 +27,12 @@ export class AirQualityPage implements OnInit {
   currentVOC?: number;
   airQualityChart: any;
 
+
+  private isRefreshing = false;
+  private refreshEvent: any;
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
-
+ 
   // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchSensorDataForTimeFrame('hours', 24, 'day');
@@ -67,11 +71,30 @@ export class AirQualityPage implements OnInit {
     observable$.subscribe(data => {
       console.log('data1', data)
       this.processSensorData(data, selectedTimeFrame);
+  
+      // Complete the refresh action after data is processed
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
+  
     }, error => {
       console.error('Error fetching sensor data:', error);
+  
+      // Complete the refresh action also in case of an error
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
     });
   }
 
+  doRefresh(event: any) {
+    this.isRefreshing = true;
+    this.refreshEvent = event;
+    this.fetchSensorDataForTimeFrame('hours', 24, 'day'); // Or your preferred default time frame
+  }
+  
   // Method to process  data and prepare it for the chart
   processSensorData(data: any[], selectedTimeFrame: string) {
 

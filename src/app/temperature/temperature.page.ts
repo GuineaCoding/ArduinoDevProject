@@ -26,6 +26,9 @@ export class TemperaturePage implements OnInit {
   maxTemperature?: number;
   temperatureChart: any;
 
+  private isRefreshing = false;
+  private refreshEvent: any;
+
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
@@ -61,16 +64,33 @@ export class TemperaturePage implements OnInit {
   
     this.fetchTemperatureDataForTimeFrame('hours', hours, timeFrame);
   }
+
+  doRefresh(event: any) {
+    this.isRefreshing = true;
+    this.refreshEvent = event;
+    this.fetchTemperatureDataForTimeFrame('hours', 24, 'day'); 
+  }
   
 // Method to fetch data for a given time frame
-  fetchTemperatureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
-    const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
-    observable$.subscribe(data => {
-      this.processTemperatureData(data, selectedTimeFrame);
-    }, error => {
-      console.error('Error fetching temperature data:', error);
-    });
-  }
+fetchTemperatureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
+  const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
+  observable$.subscribe(data => {
+    console.log(data);
+    this.processTemperatureData(data, selectedTimeFrame);
+
+    if (this.isRefreshing) {
+      this.refreshEvent.target.complete();
+      this.isRefreshing = false;
+    }
+
+  }, error => {
+    console.error('Error fetching temperature data:', error);
+    if (this.isRefreshing) {
+      this.refreshEvent.target.complete();
+      this.isRefreshing = false;
+    }
+  });
+}
 
   // Method to process  data and prepare it for the chart
   processTemperatureData(data: any[], selectedTimeFrame: string) {
@@ -162,6 +182,4 @@ export class TemperaturePage implements OnInit {
     console.log("Chart data object:", data);
     console.log("Chart options object:", options);
   }
-
-  
 }

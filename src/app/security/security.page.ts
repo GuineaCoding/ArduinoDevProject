@@ -14,12 +14,16 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryS
   styleUrls: ['./security.page.scss'], // Styles for the component
 })
 
+
 // Properties to store current readings
 export class SecurityPage implements OnInit {
   currentpirState?: number;
   securityChart: any; // Property to hold the Chart.js chart instance
   holidayMode!: boolean;
 
+  private isRefreshing = false;
+  private refreshEvent: any;
+  
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService,
     private firebaseService: FirebaseService,) { }
@@ -60,12 +64,27 @@ export class SecurityPage implements OnInit {
     this.fetchSecurityDataForTimeFrame('hours', hours, timeFrame);
   }
 
+  doRefresh(event: any) {
+    this.isRefreshing = true;
+    this.refreshEvent = event;
+    this.fetchSecurityDataForTimeFrame('hours', 24, 'day'); 
+  }
   // Method to fetch data for a given time frame
   fetchSecurityDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     this.sensorDataService.getSensorDataForLastHours(value).subscribe(data => {
       this.processSecurityData(data, selectedTimeFrame);
+      console.log(data);
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
+
     }, error => {
       console.error('Error fetching security data:', error);
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
     });
   }
 

@@ -26,6 +26,9 @@ export class HumidityPage implements OnInit {
   maxHumidity?: number;
   humidityChart: any;
 
+  private isRefreshing = false;
+  private refreshEvent: any;
+
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
@@ -67,9 +70,28 @@ export class HumidityPage implements OnInit {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
       this.processHumidityData(data, selectedTimeFrame);
+      console.log(data)
+      // Complete the refresh action after data is processed
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
+
     }, error => {
       console.error('Error fetching humidity data:', error);
+
+      // Complete the refresh action also in case of an error
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
     });
+  }
+  //ion-refresh feature
+  doRefresh(event: any) {
+    this.isRefreshing = true;
+    this.refreshEvent = event;
+    this.fetchHumidityDataForTimeFrame('hours', 24, 'day'); 
   }
 
   // Method to process  data and prepare it for the chart

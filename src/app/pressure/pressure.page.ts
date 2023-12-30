@@ -26,6 +26,9 @@ export class PressurePage implements OnInit {
   maxPressure?: number;
   pressureChart: any;
 
+  private isRefreshing = false;
+  private refreshEvent: any;
+
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
@@ -63,12 +66,31 @@ export class PressurePage implements OnInit {
   }
 
   // Method to fetch data for a given time frame
+  doRefresh(event: any) {
+    this.isRefreshing = true;
+    this.refreshEvent = event;
+    this.fetchPressureDataForTimeFrame('hours', 24, 'day'); 
+  }
+
   fetchPressureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
       this.processPressureData(data, selectedTimeFrame);
+      console.log(data);
+      // Complete the refresh action after data is processed
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
+
     }, error => {
       console.error('Error fetching pressure data:', error);
+
+      // Complete the refresh action also in case of an error
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
     });
   }
 

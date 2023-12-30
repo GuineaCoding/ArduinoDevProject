@@ -26,6 +26,10 @@ export class MoisturePage implements OnInit {
   maxMoisture?: number;
   moistureChart: any; // Property to hold the Chart.js chart instance
 
+
+  private isRefreshing = false;
+  private refreshEvent: any;
+
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
@@ -64,13 +68,31 @@ export class MoisturePage implements OnInit {
   }
 
   // Method to fetch data for a given time frame
+  doRefresh(event: any) {
+    this.isRefreshing = true;
+    this.refreshEvent = event;
+    this.fetchMoistureDataForTimeFrame('hours', 24, 'day'); // Or your preferred default time frame
+  }
+
   fetchMoistureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
-
     observable$.subscribe(data => {
       this.processMoistureData(data, selectedTimeFrame);
+      console.log(data)
+      // Complete the refresh action after data is processed
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
+
     }, error => {
       console.error('Error fetching moisture data:', error);
+
+      // Complete the refresh action also in case of an error
+      if (this.isRefreshing) {
+        this.refreshEvent.target.complete();
+        this.isRefreshing = false;
+      }
     });
   }
 

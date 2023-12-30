@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">My Ficus Soil Moisture</ion-title>
@@ -94,6 +97,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Moisture Level Legend</ion-card-title>
+      <p class="white-text ion-text-center">Consider to water the plant when moistore is bellow half average</p>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
