@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-    // Importing Chart.js components required for creating the chart
+  // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
@@ -20,21 +20,21 @@ Chart.register(
 })
 
 // Properties to store current, minimum, and maximum readings
-export class AirQualityPage implements OnInit { 
+export class AirQualityPage implements OnInit {
   currentCO2?: number;
   currentGasResistance?: number;
   currentVOC?: number;
-  airQualityChart: any; 
+  airQualityChart: any;
 
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
-    // ngOnInit lifecycle hook to fetch initial data
+  // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchSensorDataForTimeFrame('hours', 24, 'day');
   }
 
-// Method to update the time frame of data being displayed
+  // Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -49,46 +49,46 @@ export class AirQualityPage implements OnInit {
         hours = 24 * 7;
         break;
       case 'month':
-        hours = 24 * 30; 
+        hours = 24 * 30;
         break;
       case 'year':
-        hours = 24 * 365; 
+        hours = 24 * 365;
         break;
       default:
         console.error('Invalid time frame specified: ', timeFrame);
         return;
     }
-  
+
     this.fetchSensorDataForTimeFrame('hours', hours, timeFrame);
   }
-// Method to fetch data for a given time frame
+  // Method to fetch data for a given time frame
   fetchSensorDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
-      console.log('data1',data)
+      console.log('data1', data)
       this.processSensorData(data, selectedTimeFrame);
     }, error => {
       console.error('Error fetching sensor data:', error);
     });
   }
-  
+
   // Method to process  data and prepare it for the chart
   processSensorData(data: any[], selectedTimeFrame: string) {
-   
+
     const validData = data.filter(d => !isNaN(+d.co2) && !isNaN(+d.gasResistor) && !isNaN(+d.volatileOrganicCompounds));
-  console.log('validData',validData)
+    console.log('validData', validData)
     const co2Data = validData.map(d => +d.co2 / 1000);
     const gasResistanceData = validData.map(d => +d.gasResistor / 1e6);
     const vocData = validData.map(d => +d.volatileOrganicCompounds);
     console.log('vocData', vocData)
-  
+
     let labels;
     if (selectedTimeFrame === 'hour' || selectedTimeFrame === 'day') {
       labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleTimeString());
     } else {
       labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleString());
     }
-  
+
     if (co2Data.length > 0) {
       this.currentCO2 = co2Data[co2Data.length - 1];
     }
@@ -98,16 +98,16 @@ export class AirQualityPage implements OnInit {
     if (vocData.length > 0) {
       this.currentVOC = vocData[vocData.length - 1];
     } else {
-      this.currentVOC = 0; 
-      this.currentGasResistance = 0; 
-      this.currentCO2 = 0; 
+      this.currentVOC = 0;
+      this.currentGasResistance = 0;
+      this.currentCO2 = 0;
     }
-  
+
     this.setupSensorDataChart(labels, co2Data, gasResistanceData, vocData);
   }
-  
 
- // Method to set up the data chart using Chart.js
+
+  // Method to set up the data chart using Chart.js
   setupSensorDataChart(labels: string[], co2Data: number[], gasResistanceData: number[], vocData: number[]) {
     const data = {
       labels: labels,
@@ -120,7 +120,7 @@ export class AirQualityPage implements OnInit {
         },
         {
           label: 'Gas Resistance (MΩ)',
-          data: gasResistanceData, 
+          data: gasResistanceData,
           borderColor: 'rgba(255, 206, 86, 1)',
           borderWidth: 1,
         },
@@ -136,21 +136,21 @@ export class AirQualityPage implements OnInit {
     const options = {
       scales: {
         y: {
-          
+
         },
         x: {
-         
+
           time: {
-            unit: 'hour' as const, 
+            unit: 'hour' as const,
           },
           title: {
             display: true,
             text: 'Time'
           },
           ticks: {
-            
-            minRotation: 90, 
-            maxRotation: 90  
+
+            minRotation: 90,
+            maxRotation: 90
           },
         }
       },

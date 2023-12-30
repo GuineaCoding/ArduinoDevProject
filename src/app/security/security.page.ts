@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-  // Importing Chart.js components required for creating the chart
+// Importing Chart.js components required for creating the chart
 import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, TimeScale, TimeSeriesScale } from 'chart.js';
 import 'chartjs-adapter-date-fns'; // Adapter for date functionality in Chart.js
 import { SensorDataService } from '../services/sensor-data.service';
@@ -18,13 +18,13 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryS
 export class SecurityPage implements OnInit {
   currentpirState?: number;
   securityChart: any; // Property to hold the Chart.js chart instance
-  holidayMode!: boolean; 
+  holidayMode!: boolean;
 
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService,
     private firebaseService: FirebaseService,) { }
 
-    // ngOnInit lifecycle hook to fetch initial data
+  // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchSecurityDataForTimeFrame('hours', 24, 'day');
     this.firebaseService.getHolidayModeState().subscribe(state => {
@@ -32,7 +32,7 @@ export class SecurityPage implements OnInit {
     });
   }
 
-// Method to update the time frame of data being displayed
+  // Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -69,9 +69,9 @@ export class SecurityPage implements OnInit {
     });
   }
 
-// Method to process  data and prepare it for the chart
+  // Method to process  data and prepare it for the chart
   processSecurityData(data: any[], selectedTimeFrame: string) {
-   
+
     const securityData = data.map(d => d.pirState);
 
     let labels = data.map(d => new Date(d.timestamp * 1000).toLocaleString());
@@ -82,7 +82,7 @@ export class SecurityPage implements OnInit {
     this.setupSecurityChart(labels, securityData);
   }
 
-   // Method to set up the data chart using Chart.js
+  // Method to set up the data chart using Chart.js
   setupSecurityChart(labels: string[], securityData: number[]) {
     // Setup chart here
     const data = {
@@ -127,20 +127,17 @@ export class SecurityPage implements OnInit {
       this.securityChart = new Chart(canvas, { type: 'line', data: data, options: options });
     } else {
       console.error('Canvas element not found');
-    }
+    };
 
   }
   toggleHolidayMode() {
     this.firebaseService.setHolidayModeStatus(this.holidayMode);
-  }
+  };
   turnHolidayModeOn() {
     this.firebaseService.setHolidayModeStatus(true);
     this.holidayMode = true;
-  }
+  };
   turnHolidayModeOff() {
     this.firebaseService.setHolidayModeStatus(false);
-  }
-
-}
-
-
+  };
+};

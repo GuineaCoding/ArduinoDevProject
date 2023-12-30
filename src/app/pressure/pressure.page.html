@@ -33,7 +33,7 @@
               <p class="ion-text-center main-indicator-label">{{ maxPressure?.toFixed(2) }} hPa</p>
             </ion-text>
           </ion-col>
-          
+
           <!-- Right Column -->
           <ion-col size="6">
             <ion-img src="/assets/images/pressurePngImage.png"></ion-img>
@@ -45,32 +45,38 @@
 
   <!-- Timeframe Selection Buttons -->
   <ion-card>
-    <ion-text color="warning">
-    <h2 class="ion-text-center">Chose timeframe</h2>
-  </ion-text>
-  </ion-card>
-  <ion-card>
     <ion-segment (ionChange)="updateTimeFrame($event.detail)">
-      <ion-segment-button value="hour">
-        <ion-label class="ion-text-wrap">Last Hour</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="day">
-        <ion-label class="ion-text-wrap">Last Day</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-card>
+      <ion-row>
+        <ion-col size="6">
+          <ion-segment-button class="button-timeframe-design" value="hour">
+            <ion-label class="ion-text-wrap">Last Hour</ion-label>
+          </ion-segment-button>
+        </ion-col>
 
-  <ion-card>
-    <ion-segment (ionChange)="updateTimeFrame($event.detail)">
-      <ion-segment-button value="week">
-        <ion-label class="ion-text-wrap">Last Week</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="month">
-        <ion-label class="ion-text-wrap">Last Month</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="year">
-        <ion-label class="ion-text-wrap">Last Year</ion-label>
-      </ion-segment-button>
+        <ion-col size="6">
+          <ion-segment-button value="day">
+            <ion-label class="ion-text-wrap">Last Day</ion-label>
+          </ion-segment-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="4">
+          <ion-segment-button value="week">
+            <ion-label class="ion-text-wrap">Last Week</ion-label>
+          </ion-segment-button>
+        </ion-col>
+        <ion-col size="4">
+          <ion-segment-button value="month">
+            <ion-label class="ion-text-wrap">Last Month</ion-label>
+          </ion-segment-button>
+        </ion-col>
+        <ion-col size="4">
+          <ion-segment-button value="year">
+            <ion-label class="ion-text-wrap">Last Year</ion-label>
+          </ion-segment-button>
+        </ion-col>
+      </ion-row>
     </ion-segment>
   </ion-card>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-    // Importing Chart.js components required for creating the chart
+  // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
@@ -26,15 +26,15 @@ export class HumidityPage implements OnInit {
   maxHumidity?: number;
   humidityChart: any;
 
-// Constructor with SensorDataService injected for fetching sensor data
+  // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
-// ngOnInit lifecycle hook to fetch initial data
+  // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchHumidityDataForTimeFrame('hours', 24, 'day');
   };
 
-// Method to update the time frame of data being displayed
+  // Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -58,13 +58,13 @@ export class HumidityPage implements OnInit {
         console.error('Invalid time frame specified: ', timeFrame);
         return;
     }
-  
+
     this.fetchHumidityDataForTimeFrame('hours', hours, timeFrame);
   }
-  
+
   // Method to fetch data for a given time frame
   fetchHumidityDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
-    const observable$ = this.sensorDataService.getSensorDataForLastHours(value); 
+    const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
       this.processHumidityData(data, selectedTimeFrame);
     }, error => {
@@ -97,28 +97,28 @@ export class HumidityPage implements OnInit {
     this.setupHumidityChart(labels, humidities);
   }
 
-   // Method to set up the data chart using Chart.js
+  // Method to set up the data chart using Chart.js
   setupHumidityChart(labels: string[], humidities: number[]) {
-  
+
     const data = {
       labels: labels,
       datasets: [{
         label: 'Humidity',
         data: humidities,
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',  
-        borderColor: 'rgba(54, 162, 235, 1)',      
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
       }]
     };
     const options = {
       scales: {
         y: {
-          
+
         },
         x: {
-         
+
           time: {
-            unit: 'hour' as const, 
+            unit: 'hour' as const,
           },
           title: {
             display: true,
@@ -126,8 +126,8 @@ export class HumidityPage implements OnInit {
           },
           ticks: {
             // Set rotation angles here
-            minRotation: 90, 
-            maxRotation: 90  
+            minRotation: 90,
+            maxRotation: 90
           },
         }
       },
@@ -145,7 +145,7 @@ export class HumidityPage implements OnInit {
     if (this.humidityChart) {
       this.humidityChart.destroy();
     }
-    
+
     const canvas = document.getElementById('humidityChart') as HTMLCanvasElement;
     if (canvas) {
       canvas.height = 400;

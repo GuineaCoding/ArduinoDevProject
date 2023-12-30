@@ -26,15 +26,15 @@ export class PressurePage implements OnInit {
   maxPressure?: number;
   pressureChart: any;
 
-// Constructor with SensorDataService injected for fetching sensor data
+  // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
-// ngOnInit lifecycle hook to fetch initial data
+  // ngOnInit lifecycle hook to fetch initial data
   ngOnInit() {
     this.fetchPressureDataForTimeFrame('hours', 24, 'day');
   };
 
-// Method to update the time frame of data being displayed
+  // Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -58,11 +58,11 @@ export class PressurePage implements OnInit {
         console.error('Invalid time frame specified: ', timeFrame);
         return;
     }
-  
+
     this.fetchPressureDataForTimeFrame('hours', hours, timeFrame);
   }
-  
-    // Method to fetch data for a given time frame
+
+  // Method to fetch data for a given time frame
   fetchPressureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
     const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
     observable$.subscribe(data => {
@@ -76,14 +76,14 @@ export class PressurePage implements OnInit {
   processPressureData(data: any[], selectedTimeFrame: string) {
     const validData = data.filter(d => !isNaN(+d.pressureKPa));
     const pressures = validData.map(d => +d.pressureKPa * 10);  // Convert from kPa to hPa
-  
+
     let labels;
     if (selectedTimeFrame === 'hour' || selectedTimeFrame === 'day') {
       labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleTimeString());
     } else {
       labels = validData.map(d => new Date(d.timestamp * 1000).toLocaleString());
     }
-  
+
     if (pressures.length > 0) {
       this.currentPressure = pressures[pressures.length - 1];
       this.minPressure = Math.min(...pressures);
@@ -93,7 +93,7 @@ export class PressurePage implements OnInit {
       this.minPressure = 0;
       this.maxPressure = 0;
     }
-  
+
     this.setupPressureChart(labels, pressures);
   }
 
@@ -140,9 +140,9 @@ export class PressurePage implements OnInit {
     };
 
     if (this.pressureChart) {
-      this.pressureChart.destroy(); 
+      this.pressureChart.destroy();
     }
-    
+
     const canvas = document.getElementById('pressureChart') as HTMLCanvasElement;
     if (canvas) {
       canvas.height = 350;

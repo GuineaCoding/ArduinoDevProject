@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-    // Importing Chart.js components required for creating the chart
+  // Importing Chart.js components required for creating the chart
   Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale,
   Title, Tooltip, Legend, TimeScale, TimeSeriesScale
 } from 'chart.js';
@@ -35,7 +35,7 @@ export class MoisturePage implements OnInit {
     this.fetchMoistureDataForTimeFrame('hours', 24, 'day');
   }
 
-// Method to update the time frame of data being displayed
+  // Method to update the time frame of data being displayed
   updateTimeFrame(eventDetail: any) {
     const timeFrame = eventDetail.value;
     let hours;
@@ -59,21 +59,21 @@ export class MoisturePage implements OnInit {
         console.error('Invalid time frame specified: ', timeFrame);
         return;
     }
-  
+
     this.fetchMoistureDataForTimeFrame('hours', hours, timeFrame);
   }
-  
+
   // Method to fetch data for a given time frame
   fetchMoistureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFrame: string) {
-    const observable$ = this.sensorDataService.getSensorDataForLastHours(value); 
+    const observable$ = this.sensorDataService.getSensorDataForLastHours(value);
 
     observable$.subscribe(data => {
       this.processMoistureData(data, selectedTimeFrame);
     }, error => {
       console.error('Error fetching moisture data:', error);
-    }); 
+    });
   }
- 
+
   // Method to process  pressure data and prepare it for the chart
   processMoistureData(data: any[], selectedTimeFrame: string) {
     const validData = data.filter(d => !isNaN(+d.moisture));
@@ -99,34 +99,34 @@ export class MoisturePage implements OnInit {
     this.setupMoistureChart(labels, moistureLevels);
   }
 
-   // Method to set up the data chart using Chart.js
+  // Method to set up the data chart using Chart.js
   setupMoistureChart(labels: string[], moistureLevels: number[]) {
     const data = {
       labels: labels,
       datasets: [{
         label: 'Moisture Level',
         data: moistureLevels,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',  
-        borderColor: 'rgba(75, 192, 192, 1)',      
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
       }]
     };
     const options = {
       scales: {
         y: {
-          
+
         },
         x: {
           time: {
-            unit: 'hour' as const, 
+            unit: 'hour' as const,
           },
           title: {
             display: true,
             text: 'Time'
           },
           ticks: {
-            minRotation: 90, 
-            maxRotation: 90  
+            minRotation: 90,
+            maxRotation: 90
           },
         }
       },
@@ -144,7 +144,7 @@ export class MoisturePage implements OnInit {
     if (this.moistureChart) {
       this.moistureChart.destroy();
     }
-    
+
     const canvas = document.getElementById('moistureChart') as HTMLCanvasElement;
     if (canvas) {
       canvas.height = 350;
