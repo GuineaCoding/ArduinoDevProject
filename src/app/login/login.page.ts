@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AlertController,LoadingController  } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginPage {
     private router: Router,
     private authService: AuthService,
     private alertController: AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private navCtrl: NavController,
   ) {}
 
   async login() {
@@ -33,7 +35,7 @@ export class LoginPage {
     try {
       await this.afAuth.signInWithEmailAndPassword(this.email, this.password);
       await loading.dismiss();
-      this.router.navigateByUrl('/home');
+      this.navCtrl.navigateRoot('/home');
     } catch (error) {
       await loading.dismiss(); 
       this.showErrorAlert();

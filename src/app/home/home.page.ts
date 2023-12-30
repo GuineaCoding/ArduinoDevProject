@@ -81,3 +81,5 @@ export class HomePage implements OnInit {
     return pirState === 1 ? 'red' : 'green';
   }
 }
+
+
