@@ -20,118 +20,118 @@
     <ion-col size="6">
       <ion-card class="uniform-card">
         <ion-card-content class="card-content-custom">
-          <div class="text-center"> 
-              <h2 >Temperature</h2>
-            </div>
-            <div class="text-center"> 
-              <p>{{ reading.temperature.toFixed(2) }} °C</p>
-            </div>
+          <div class="text-center">
+            <h2>Temperature</h2>
+          </div>
+          <div class="text-center">
+            <p>{{ reading.temperature.toFixed(2) }} °C</p>
+          </div>
           <ion-row>
-              <ion-img class="homePageImage" src="/assets/images/thermometerPngImage.png"></ion-img>
+            <ion-img class="homePageImage" src="/assets/images/thermometerPngImage.png"></ion-img>
           </ion-row>
         </ion-card-content>
         <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('temperature')">View Details</ion-button>
       </ion-card>
     </ion-col>
 
-<!-- Humidity -->
-<ion-col size="6">
-  <ion-card class="uniform-card">
-    <ion-card-content class="card-content-custom">
-      <div class="text-center">
-        <h2>Humidity</h2>
-      </div>
-      <div class="text-center">
-        <p>{{ reading.humidity.toFixed(2) }} %</p>
-      </div>
-      <ion-row>
-        <ion-img class="homePageImage" src="/assets/images/humidityPngImage.png"></ion-img>
-      </ion-row>
-    </ion-card-content>
-    <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('humidity')">View Details</ion-button>
-  </ion-card>
-</ion-col>
+    <!-- Humidity -->
+    <ion-col size="6">
+      <ion-card class="uniform-card">
+        <ion-card-content class="card-content-custom">
+          <div class="text-center">
+            <h2>Humidity</h2>
+          </div>
+          <div class="text-center">
+            <p>{{ reading.humidity.toFixed(2) }} %</p>
+          </div>
+          <ion-row>
+            <ion-img class="homePageImage" src="/assets/images/humidityPngImage.png"></ion-img>
+          </ion-row>
+        </ion-card-content>
+        <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('humidity')">View Details</ion-button>
+      </ion-card>
+    </ion-col>
 
-<!-- Pressure -->
-<ion-col size="6">
-  <ion-card class="uniform-card">
-    <ion-card-content class="card-content-custom">
-      <div class="text-center">
-        <h2>Pressure</h2>
-      </div>
-      <div class="text-center">
-        <p>{{ reading.pressure.toFixed(2)}} hPa</p>
-      </div>
-      <ion-row>
-        <ion-img class="homePageImage" src="/assets/images/pressurePngImage.png"></ion-img>
-      </ion-row>
-    </ion-card-content>
-    <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('pressure')">View Details</ion-button>
-  </ion-card>
-</ion-col>
+    <!-- Pressure -->
+    <ion-col size="6">
+      <ion-card class="uniform-card">
+        <ion-card-content class="card-content-custom">
+          <div class="text-center">
+            <h2>Pressure</h2>
+          </div>
+          <div class="text-center">
+            <p>{{ reading.pressure.toFixed(2)}} hPa</p>
+          </div>
+          <ion-row>
+            <ion-img class="homePageImage" src="/assets/images/pressurePngImage.png"></ion-img>
+          </ion-row>
+        </ion-card-content>
+        <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('pressure')">View Details</ion-button>
+      </ion-card>
+    </ion-col>
 
-<!-- Moisture -->
-<ion-col size="6">
-  <ion-card class="uniform-card">
-    <ion-card-content class="card-content-custom">
-      <div class="text-center">
-        <h2>Moisture</h2>
-      </div>
-      <div class="text-center">
-        <p>{{ reading.moisture}}</p>
-      </div>
-      <ion-row>
-        <ion-img class="homePageImage" src="/assets/images/moisturePngImage.png"></ion-img>
-      </ion-row>
-    </ion-card-content>
-    <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('moisture')">View Details</ion-button>
-  </ion-card>
-</ion-col>
+    <!-- Moisture -->
+    <ion-col size="6">
+      <ion-card class="uniform-card">
+        <ion-card-content class="card-content-custom">
+          <div class="text-center">
+            <h2>Moisture</h2>
+          </div>
+          <div class="text-center">
+            <p>{{ reading.moisture}}</p>
+          </div>
+          <ion-row>
+            <ion-img class="homePageImage" src="/assets/images/moisturePngImage.png"></ion-img>
+          </ion-row>
+        </ion-card-content>
+        <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('moisture')">View Details</ion-button>
+      </ion-card>
+    </ion-col>
 
-<!-- CO2 -->
-<ion-col size="6">
-  <ion-card class="uniform-card">
-    <ion-card-content class="card-content-custom">
-      <div class="text-center">
-        <h2>CO2</h2>
-      </div>
-      <div class="text-center">
-        <p>{{ reading.co2 / 1000 }} PPM</p>
-      </div>
-      <div class="text-center">
-        <p>Status</p>
-      </div>
-      <ion-row>
-        <ion-img class="homePageImage" src="/assets/images/airQualityImage.png"></ion-img>
-      </ion-row>
-      <ion-row>
-        <ion-card class="co2-level-indicator" [style.background-color]="getCo2LevelColor(reading.co2)"></ion-card>
-      </ion-row>
-    </ion-card-content>
-    <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('air-quality')">View Details</ion-button>
-  </ion-card>
-</ion-col>
+    <!-- CO2 -->
+    <ion-col size="6">
+      <ion-card class="uniform-card">
+        <ion-card-content class="card-content-custom last-card">
+          <div class="text-center">
+            <h2>CO2</h2>
+          </div>
+          <div class="text-center">
+            <p>{{ reading.co2 / 1000 }} PPM</p>
+          </div>
+          <div class="text-center">
+            <p>Status</p>
+          </div>
+          <ion-row>
+            <ion-img class="homePageImage" src="/assets/images/airQualityImage.png"></ion-img>
+          </ion-row>
+          <ion-row>
+            <ion-card class="co2-level-indicator" [style.background-color]="getCo2LevelColor(reading.co2)"></ion-card>
+          </ion-row>
+        </ion-card-content>
+        <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('air-quality')">View Details</ion-button>
+      </ion-card>
+    </ion-col>
 
-<!-- Security -->
-<ion-col size="6">
-  <ion-card class="uniform-card">
-    <ion-card-content class="card-content-custom">
-      <div class="text-center">
-        <h2>Security</h2>
-      </div>
-      <div class="text-center">
-        <p>{{ getPirStateLabel(reading.pirstate) }}</p>
-      </div>
-      <ion-row>
-        <ion-img class="homePageImage" src="/assets/images/security.png"></ion-img>
-      </ion-row>
-      <ion-row>
-        <ion-card class="security-indicator" [style.background-color]="getPirStateColor(reading.pirstate)"></ion-card>
-      </ion-row>
-    </ion-card-content>
-    <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('security')">View Details</ion-button>
-  </ion-card>
-</ion-col>
-
+    <!-- Security -->
+    <ion-col size="6">
+      <ion-card class="uniform-card">
+        <ion-card-content class="card-content-custom last-card">
+          <div class="text-center">
+            <h2>Security</h2>
+          </div>
+          <div class="text-center">
+            <p>{{ getPirStateLabel(reading.pirstate) }}</p>
+          </div>
+          <ion-row>
+            <ion-img class="homePageImage" src="/assets/images/security.png"></ion-img>
+          </ion-row>
+          <ion-row>
+            <ion-card class="security-indicator"
+              [style.background-color]="getPirStateColor(reading.pirstate)"></ion-card>
+          </ion-row>
+        </ion-card-content>
+        <ion-button class="buttonMain" expand="full" (click)="navigateToDetail('security')">View Details</ion-button>
+      </ion-card>
+    </ion-col>
   </ion-row>
 </ion-content>
