@@ -100,7 +100,7 @@ export class HomePage implements OnInit {
 
   // Function to get label for PIR state
   getPirStateLabel(pirState: number): string {
-    return pirState === 1 ? 'Motion Was Detected' : 'No Motion Detected';
+    return pirState === 1 ? 'Motion Was Detected' : 'No Motion Was Detected';
   }
 
   // Function to get color based on PIR state

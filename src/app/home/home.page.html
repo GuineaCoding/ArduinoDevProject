@@ -16,9 +16,14 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <p class="welcome-text">Welcome to the Dashboard!</p>
-  <ion-row>
+  <ion-card>
+    <ion-text color="warning">
+      <h6 class="ion-text-center">Welcome to Your Control Center!
 
+        Explore the Latest Updates from Our Advanced Sensors!</h6>
+    </ion-text>
+  </ion-card>
+  <ion-row>
     <!-- Temperature -->
     <ion-col size="6">
       <ion-card class="uniform-card">

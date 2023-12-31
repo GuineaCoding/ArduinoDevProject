@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'security',
     loadChildren: () => import('./security/security.module').then(m => m.SecurityPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'faq',
+    loadChildren: () => import('./faq/faq.module').then( m => m.FAQPageModule)
   }
 ];
 
