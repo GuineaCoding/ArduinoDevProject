@@ -115,13 +115,25 @@
 
 <h2>App Demo And Image samples</h2>
 <p>Image samples</p>
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img style="width:20%; height: 150px" src="https://www.dropbox.com/scl/fi/40yqvr7fp73p57r2y138i/511.jpg" alt="Image 1" width="100"/>
-    <img style="width:20%; height: 150px"src="https://www.dropbox.com/scl/fi/ghaovitwfctny5kkycus6/512.jpg" alt="Image 2" width="100"/>
-    <img style="width:20%; height: 150px" src="https://www.dropbox.com/scl/fi/frljih7ujkiaby4z9ydg6/513.jpg" alt="Image 3" width="100"/>
-    <img style="width:18%; height: 150px" src="https://www.dropbox.com/scl/fi/ji0kxfs41qdxk61zhzea0/514.jpg" alt="Image 4" width="100"/>
-    <img style="width:20%; height: 150px" src="https://www.dropbox.com/scl/fi/gdztznbx4d3u5132g9zdk/515.jpg" alt="Image 5" width="100"/>
+<div align="center">
+    <a href="https://www.dropbox.com/scl/fi/40yqvr7fp73p57r2y138i/511.jpg">
+        <img style="width:20%; height: 150px" src="https://www.dropbox.com/scl/fi/40yqvr7fp73p57r2y138i/511.jpg" alt="Image 1"/>
+    </a>
+    <a href="https://www.dropbox.com/scl/fi/ghaovitwfctny5kkycus6/512.jpg">
+        <img style="width:20%; height: 150px" src="https://www.dropbox.com/scl/fi/ghaovitwfctny5kkycus6/512.jpg" alt="Image 2"/>
+    </a>
+    <a href="https://www.dropbox.com/scl/fi/frljih7ujkiaby4z9ydg6/513.jpg">
+        <img style="width:20%; height: 150px" src="https://www.dropbox.com/scl/fi/frljih7ujkiaby4z9ydg6/513.jpg" alt="Image 3"/>
+    </a>
+    <a href="https://www.dropbox.com/scl/fi/ji0kxfs41qdxk61zhzea0/514.jpg">
+        <img style="width:18%; height: 150px" src="https://www.dropbox.com/scl/fi/ji0kxfs41qdxk61zhzea0/514.jpg" alt="Image 4"/>
+    </a>
+    <a href="https://www.dropbox.com/scl/fi/gdztznbx4d3u5132g9zdk/515.jpg">
+        <img style="width:20%; height: 150px" src="https://www.dropbox.com/scl/fi/gdztznbx4d3u5132g9zdk/515.jpg" alt="Image 5"/>
+    </a>
 </div>
+
+
 
 <a href="https://www.dropbox.com/scl/fi/l37qlphdl4dt47g0p632m/video.mp4" height="480px" width="640px" allowfullscreen>Video Sample</a>
 
