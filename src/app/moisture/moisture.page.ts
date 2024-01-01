@@ -134,6 +134,7 @@ export class MoisturePage implements OnInit {
       }]
     };
     const options = {
+      maintainAspectRatio: false,
       scales: {
         y: {
 
@@ -169,8 +170,6 @@ export class MoisturePage implements OnInit {
 
     const canvas = document.getElementById('moistureChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 350;
-
       this.moistureChart = new Chart(canvas, {
         type: 'line',
         data: data,

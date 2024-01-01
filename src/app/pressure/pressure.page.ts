@@ -29,6 +29,7 @@ export class PressurePage implements OnInit {
   private isRefreshing = false;
   private refreshEvent: any;
 
+
   // Constructor with SensorDataService injected for fetching sensor data
   constructor(private sensorDataService: SensorDataService) { }
 
@@ -132,6 +133,7 @@ export class PressurePage implements OnInit {
       }]
     };
     const options = {
+      maintainAspectRatio: false,
       scales: {
         y: {
           // you can add options for y-axis if needed
@@ -167,7 +169,6 @@ export class PressurePage implements OnInit {
 
     const canvas = document.getElementById('pressureChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 350;
       this.pressureChart = new Chart(canvas, {
         type: 'line',
         data: data,

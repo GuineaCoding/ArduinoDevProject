@@ -157,6 +157,7 @@ export class AirQualityPage implements OnInit {
     };
 
     const options = {
+      maintainAspectRatio: false,
       scales: {
         y: {
 
@@ -190,7 +191,6 @@ export class AirQualityPage implements OnInit {
 
     const canvas = document.getElementById('airQualityChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 350;
       if (this.airQualityChart) {
         this.airQualityChart.destroy();
       }

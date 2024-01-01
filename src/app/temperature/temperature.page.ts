@@ -68,7 +68,7 @@ export class TemperaturePage implements OnInit {
   doRefresh(event: any) {
     this.isRefreshing = true;
     this.refreshEvent = event;
-    this.fetchTemperatureDataForTimeFrame('hours', 24, 'day'); 
+    this.fetchTemperatureDataForTimeFrame('hours', 24, 'day');
   }
   
 // Method to fetch data for a given time frame
@@ -133,6 +133,7 @@ fetchTemperatureDataForTimeFrame(timeUnit: string, value: number, selectedTimeFr
     };
     console.log('Chart Data 111:', data);  // Log the chart data
     const options = {
+      maintainAspectRatio: false,
       scales: {
         y: {
           

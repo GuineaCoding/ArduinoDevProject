@@ -115,6 +115,7 @@ export class SecurityPage implements OnInit {
     };
 
     const options = {
+      maintainAspectRatio: false,
       scales: {
         y: {},
         x: {
@@ -139,7 +140,6 @@ export class SecurityPage implements OnInit {
 
     const canvas = document.getElementById('pirStateChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 350;
       if (this.securityChart) {
         this.securityChart.destroy();
       }

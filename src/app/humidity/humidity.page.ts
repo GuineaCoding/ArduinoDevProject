@@ -133,6 +133,7 @@ export class HumidityPage implements OnInit {
       }]
     };
     const options = {
+      maintainAspectRatio: false,
       scales: {
         y: {
 
@@ -170,8 +171,6 @@ export class HumidityPage implements OnInit {
 
     const canvas = document.getElementById('humidityChart') as HTMLCanvasElement;
     if (canvas) {
-      canvas.height = 400;
-
       this.humidityChart = new Chart(canvas, {
         type: 'line',
         data: data,
