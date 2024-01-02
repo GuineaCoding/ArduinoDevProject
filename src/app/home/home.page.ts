@@ -39,30 +39,30 @@ export class HomePage implements OnInit {
     this.fetchData(); // Initial data fetch
   }
   fetchData() {
-    // Fetching the last sensor reading from Firebase
     this.afDB
-      .list('sensorReadings', ref => ref.limitToLast(1)) // Querying the last entry
-      .valueChanges() // Listening for changes
-      .subscribe((data: any) => { // Subscribing to data changes
-        console.log('Data from Firebase:', data);
-        if (data) {
-          // Get the latest timestamp key
-          const latestTimestamp = Math.max(...Object.keys(data).map(Number));
-          const latestData = data[latestTimestamp];
-
-          // assign the values from the latest data
-          this.reading.temperature = latestData.temperature;
-          this.reading.humidity = latestData.humidity;
-          this.reading.pressure = latestData.pressureKPa * 10;
-          this.reading.moisture = latestData.moisture;
-          this.reading.co2 = latestData.co2;
-          this.reading.pirstate = latestData.pirState;
-        }
-
-        else {
+      .list('sensorReadings', ref => ref.limitToLast(3)) // Fetching last 3 entries
+      .valueChanges()
+      .subscribe((data: any[]) => {
+        if (data && data.length > 0) {
+          // Iterate in reverse to find the most recent complete dataset in case that arduino didn't pushed the data beause of a connection issue.
+          for (let i = data.length - 1; i >= 0; i--) {
+            const entry = data[i];
+            if (entry.temperature !== undefined && entry.humidity !== undefined && entry.pressureKPa !== undefined && 
+                entry.moisture !== undefined && entry.co2 !== undefined && entry.pirState !== undefined) {
+              // Assign values from the first complete dataset found
+              this.reading.temperature = entry.temperature;
+              this.reading.humidity = entry.humidity;
+              this.reading.pressure = entry.pressureKPa * 10;
+              this.reading.moisture = entry.moisture;
+              this.reading.co2 = entry.co2;
+              this.reading.pirstate = entry.pirState;
+              break; // Exit the loop once a complete dataset is found
+            }
+          }
+        } else {
           console.log('No data received from Firebase');
         }
-
+  
         if (this.isRefreshing) {
           this.refreshEvent.target.complete();
           this.isRefreshing = false;
@@ -75,6 +75,7 @@ export class HomePage implements OnInit {
         }
       });
   }
+  
   // Method to handle pull-to-refresh action
   doRefresh(event: any) {
     console.log('Begin async operation');
