@@ -14,6 +14,12 @@
 <h2>Project Overview</h2>
 <p>Home-Sphere is an innovative project designed to establish seamless communication between Arduino, Firebase, and an Ionic app. It aims to create a robust system for real-time data transmission and visualization, enhancing home automation and monitoring experiences. </p>
 
+<h2>Disclaimer: The project consist of three parts:</h2>
+Part 1: Arduino code functionality <a href="https://github.com/GuineaCoding/ArduinoRealTimeProject">https://github.com/GuineaCoding/ArduinoRealTimeProject#documentation</a> <br>
+Part 2: Firebase Database<br>
+Part 3: Ionic app (current repository)
+
+
 <h2>Why chose Home-sphere?</h2>
 <p>The project facilitates real-time communication and data exchange between an Arduino setup and a mobile application platform. It leverages Firebase for data management and an Ionic app for user-friendly data visualization.</p>
 
@@ -21,6 +27,7 @@
 <ul>
     <li><a href="https://store.arduino.cc/products/explore-iot-kit-rev2" target="_blank">Arduino MKR IoT Carrier Rev2</a></li>
     <li><a href="https://firebase.google.com/" target="_blank">Firebase</a></li>
+    <li><a href="https://nodejs.org/en" target="_blank">Node.js V 20.10.0</a></li>
     <li><a href="https://ionicframework.com/" target="_blank">Ionic Framework</a></li>
     <li><a href="https://developer.android.com/studio" target="_blank">Android Studio</a></li>
     <li><a href="https://www.chartjs.org/" target="_blank">Chart.js</a></li>
@@ -28,11 +35,12 @@
 </ul>
 
 <div style="display: flex; justify-content: center; align-items: center;">
-    <img style="width:20%; height: 150px" src="https://store.arduino.cc/cdn/shop/products/AKX00044_02.unbox_1000x750.jpg?v=1680610812" alt="Image 1" width="100"/>
-    <img style="width:20%; height: 150px"src="https://firebase.google.com/static/images/brand-guidelines/logo-built_black.png" alt="Image 2" width="100"/>
-    <img style="width:20%; height: 150px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ionic-logo-landscape.svg/1920px-Ionic-logo-landscape.svg.png" alt="Image 3" width="100"/>
-    <img style="width:20%; height: 150px" src="https://techcrunch.com/wp-content/uploads/2017/02/android-studio-logo.png?w=1390&crop=1" alt="Image 4" width="100"/>
-    <img style="width:20%; height: 150px" src="https://caefn.com/wp-content/uploads/2019/06/chartjs-e1560684806991.png" alt="Image 5" width="100"/>
+    <img style="width:16%; height: 150px" src="https://store.arduino.cc/cdn/shop/products/AKX00044_02.unbox_1000x750.jpg?v=1680610812" alt="Image 1" width="100"/>
+    <img style="width:16%; height: 150px"src="https://firebase.google.com/static/images/brand-guidelines/logo-built_black.png" alt="Image 2" width="100"/>
+    <img style="width:16%; height: 150px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ionic-logo-landscape.svg/1920px-Ionic-logo-landscape.svg.png" alt="Image 3" width="100"/>
+    <img style="width:16%; height: 150px" src="https://techcrunch.com/wp-content/uploads/2017/02/android-studio-logo.png?w=1390&crop=1" alt="Image 4" width="100"/>
+    <img style="width:16%; height: 150px" src="https://caefn.com/wp-content/uploads/2019/06/chartjs-e1560684806991.png" alt="Image 5" width="100"/>
+        <img style="width:16%; height: 150px" src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Image 5" width="100"/>
 </div>
 
 <h2>Installation Instructions</h2>
