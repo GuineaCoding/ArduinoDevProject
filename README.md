@@ -51,27 +51,39 @@ Part 3: Ionic app (current repository)
 <li><strong>Create a Firebase Project:</strong> Go to <a href="https://firebase.google.com/learn/pathways/firebase-web">Firebase</a> and create a new project for web applications. Follow the provided instructions to set up Firebase for your project. </li>
 
 <li><strong>Clone and Install the Project:</strong>
-        <ul>
-            <li>Clone the project from GitHub to your local machine.</li>
-            <li>Open a terminal or command prompt in the project directory.</li>
-            <li>Run <code>npm install</code> to install all required dependencies.</li>
-        </ul>
-    </li>
-
-<li><strong>Run the Ionic App:</strong>
-        <ul>
-            <li>Within the project directory, run <code>ionic serve</code> to start the app in development mode.</li>
-            <li>Open your web browser and navigate to <code>http://localhost:8100</code> to view the app.</li>
-        </ul>
-    </li>
-
- <li><strong>Build the Ionic App:</strong>
-        <ul>
-            <li>Run <code>ionic build</code> to build the app for production.</li>
-            <li>For Android APK, ensure you have Android Studio installed and then follow Ionic's native build instructions to generate an APK file.</li>
-        </ul>
-    </li>
-</ul>
+    <h2>Instructions to Run the Ionic Project in IDE:</h2>
+    <ol>
+        <li>
+            <strong>Clone and Install the Project:</strong>
+            <ul>
+                <li>Clone the project from GitHub to your local machine.</li>
+                <li>Open a terminal or command prompt in the project directory.</li>
+                <li>Run <code>npm install</code> to install all required dependencies.</li>
+            </ul>
+        </li>
+        <li>Create the <code>environments</code> folder in the <code>src</code> folder.</li>
+        <li>In the <code>environments</code> folder, create the <code>environment.ts</code> file and place the Firebase key there.</li>
+        <li>
+            <strong>Important:</strong> Due to a misconfiguration issue between the latest version of AngularFire and Ionic, which operates on the latest version of Angular in
+            my project, an error occurs when attempting to run the project using <code>Ionic serve</code>. 
+            This can be easily fixed by following the advice provided in this GitHub issue: <a href="https://github.com/angular/angularfire/issues/3255">https://github.com/angular/angularfire/issues/3255</a>.
+        </li>
+        <li>After completing these steps, run <code>ionic serve</code>.</li>
+        <li>
+            <strong>Run the Ionic App:</strong>
+            <ul>
+                <li>Within the project directory, run <code>ionic serve</code> to start the app in development mode.</li>
+                <li>Open your web browser and navigate to <code>http://localhost:8100</code> to view the app.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Build the Ionic App:</strong>
+            <ul>
+                <li>Run <code>ionic build</code> to build the app for production.</li>
+                <li>For Android APK, ensure you have Android Studio installed and then follow Ionic's native build instructions to generate an APK file. Check the link for more details <a href="https://ionicframework.com/docs/angular/your-first-app/deploying-mobile">Build app info</a></li>
+            </ul>
+        </li>
+    </ol>
 <p>Note: Ensure that your Firebase project settings and configuration are correctly integrated into the Ionic app. This includes updating the Firebase configuration in the appropriate files within the Ionic project.</p>
 
 
